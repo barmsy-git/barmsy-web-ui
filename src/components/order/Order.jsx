@@ -33,7 +33,7 @@ const OrderDetails = ({ setOpenOrder }) => {
 
           {/* Order Type */}
           <div className="flex gap-4 px-4 py-4">
-            <button className="flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-lg text-sm">
+            <button className="flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-500 rounded-lg text-sm">
               🏠 Dine in
             </button>
             <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm">

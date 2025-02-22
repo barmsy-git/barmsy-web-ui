@@ -53,3 +53,19 @@ input[type="number"] {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
+select {
+  color: gray;
+  background-color: white;
+}
+
+select option {
+  color: gray;
+  background-color: white;
+}
+
+/* Ensures the selected option remains gray */
+select:focus option:checked {
+  background-color: white !important;
+  color: gray !important;
+}

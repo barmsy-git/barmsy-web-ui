@@ -16,6 +16,7 @@ import OnboardingSteps8 from "./pages/Onboarding/OnboardingSteps8.jsx";
 import OnboardingSteps9 from "./pages/Onboarding/OnboardingSteps9.jsx";
 import OnboardingBillingPage from "./pages/Onboarding/OnboardinBillingPage.jsx";
 import OnboardingBillingDashboardPage from "./pages/Onboarding/OnboardinBillingDashboardPage.jsx";
+import DashboardPage from "./pages/Dashboard/Dashboard.jsx";
 import PricingPage from "./pages/Onboarding/PricingPage.jsx";
 import LoadingPage from "./pages/Authentication/LoadingPage.jsx";
 import CodeExpiredPage from "./pages/Authentication/CodeExpiredPage.jsx";
@@ -134,6 +135,14 @@ function App() {
               element={
                 
                   <OnboardingBillingDashboardPage />
+                
+              }
+            /> 
+           <Route
+              path="/dashboard"
+              element={
+                
+                  <DashboardPage />
                 
               }
             /> 

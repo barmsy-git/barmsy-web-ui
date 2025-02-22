@@ -11,7 +11,7 @@ const BillingPage = () => {
   return (
     <div className="min-h-screen flex flex-col items-center bg-white">
       {/* Header */}
-      <div className="w-full bg-orange-400 py-6 text-center">
+      <div className="w-full bg-orange-500 py-6 text-center">
         <div className="flex items-center justify-center space-x-2">
           <img src={logo} alt="Barmsy Logo" className="h-8 filter brightness-0 invert" /> 
           <h1 className="text-white text-2xl font-semibold">Barmsy</h1>
@@ -20,38 +20,37 @@ const BillingPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className=" bg-white p-6 rounded-lg  max-w-6xl w-full flex">
+
+      <div className="bg-white p-6 rounded-lg max-w-6xl w-full flex items-start">
         {/* Left Section (Plans) */}
-        <div className="w-full max-w-xs border rounded-lg p-6 bg-white shadow">
-  <div className="flex justify-between items-center">
-  <h2 className="text-gray-900 font-bold text-xs">Barmsy Free Trial</h2>
-  <p className="text-gray-500 text-xs">N0.00</p>
-  </div>
-          <p className="text-xs text-gray-500 mt-2">
-            Lorem ipsum dolor sit amet consectetur. Urna id ultrices urna fringilla scelerisque viverra felis.
-          </p>
-
-          <hr className="my-4" />
-
-       <div className="flex justify-between items-center">   
-        <h2 className="text-gray-900  text-xs font-bold">Paid Plan after Trial</h2>
-       <p className="text-gray-500  text-xs">N5,000</p></div>
-          <p className="text-xs text-gray-500 mt-2">
-            Lorem ipsum dolor sit amet consectetur. Urna id ultrices urna fringilla scelerisque viverra felis.
-          </p>
-
-          <hr className="my-4" />
-
-          {/* Select Another Plan */}
-          <button className="mt-16 mb-2 text-orange-500 font-semibold text-sm flex items-center space-x-1 hover:underline "
-            onClick={() => navigate("/business-setup3")}>
-            <span>←</span>
-            <span>Select a different plan</span>
-          </button>
+      <div className="w-full max-w-xs border rounded-lg p-6 bg-white shadow self-start h-fit">
+              <div className="flex justify-between items-center">
+              <h2 className="text-gray-900 font-bold text-xs">Barmsy Free Trial</h2>
+              <p className="text-gray-500 text-xs">N0.00</p>
+            </div>
+            <p className="text-xs text-gray-500 mt-2">
+              Lorem ipsum dolor sit amet consectetur. Urna id ultrices urna fringilla scelerisque viverra felis.
+            </p>
+            <hr className="my-4" />
+            <div className="flex justify-between items-center">
+              <h2 className="text-gray-900 text-xs font-bold">Paid Plan after Trial</h2>
+              <p className="text-gray-500 text-xs">N5,000</p>
+            </div>
+            <p className="text-xs text-gray-500 mt-2">
+              Lorem ipsum dolor sit amet consectetur. Urna id ultrices urna fringilla scelerisque viverra felis.
+            </p>
+            <hr className="my-4" />
+            <button
+              className="mt-4 text-orange-500 font-semibold text-sm flex items-center space-x-1 hover:underline"
+              onClick={() => navigate("/business-setup3")}
+            >
+              <span>←</span>
+              <span>Select a different plan</span>
+            </button>
         </div>
 
         {/* Right Section (Billing Details) */}
-        <div className="w-full max-w-7xl p-12 -mt-12">
+        <div className="w-full max-w-7xl p-12 -mt-12 ">
           <h2 className="text-gray-900 text-sm font-semibold w-full max-w-3xl">Confirm your payment details</h2>
 
           {/* Due Today Box */}
@@ -89,46 +88,137 @@ const BillingPage = () => {
             </div>
           )}
 
-          {/* Billing Form (Only Shows When Button is Clicked) */}
+          {/* Billing Form */}
           {showBillingForm && (
             <>
               <h2 className="text-gray-900 text-sm font-semibold mt-4">Billing Information</h2>
               <div className="mt-3 flex items-center space-x-2">
                 <div className="w-8 h-8 rounded-md">
-                    <img src={myImage} alt="" className="rounded-md" />
+                    <img src={myImage} alt="" className="rounded-md " />
                 </div>
-                <p className="text-gray-700 text-sm font-semibold">Sochima</p>
-                <span className="text-gray-500 text-xs">Business Account</span>
+               <div className="flex flex-col">
+               <p className="text-gray-700 text-sm font-semibold">Sochima</p>
+               <span className="text-gray-500 text-xs">Business Account</span>
+               </div>
               </div>
 
               {/* Billing Form */}
               <div className="mt-4 grid grid-cols-2 gap-4 text-xs">
-                <input type="text" placeholder="First name*" className="border p-2 rounded w-full" />
-                <input type="text" placeholder="Last name*" className="border p-2 rounded w-full" />
-                <input type="text" placeholder="Address (Street, P.O. box)*" className="border p-2 rounded w-full col-span-2" />
-                <input type="text" placeholder="Address line 2 (Apartment, suite, unit)" className="border p-2 rounded w-full col-span-2" />
-                <input type="text" placeholder="City*" className="border p-2 rounded w-full" />
-                <input type="text" placeholder="Country/Region*" className="border p-2 rounded w-full" />
-                <input type="text" placeholder="State/Province*" className="border p-2 rounded w-full" />
-                <input type="text" placeholder="Postal/Zip*" className="border p-2 rounded w-full" />
-              </div>
+                
+                
+                
+  {/* First Name */}
+  <div className="flex flex-col w-full">
+    <label className="text-xs font-medium text-black mb-1">
+      First name <span className="text-red-600">*</span>
+    </label>
+    <input type="text" placeholder="Charles" className="border p-2 rounded-full w-full text-xs" />
+  </div>
 
-              <hr className="my-6" />
+  {/* Last Name */}
+  <div className="flex flex-col w-full">
+    <label className="text-xs font-medium text-black mb-1">
+      Last name <span className="text-red-600">*</span>
+    </label>
+    <input type="text" placeholder="Okechukwu" className="border p-2 rounded-full w-full text-xs" />
+  </div>
 
-              {/* Card Information */}
-              <h2 className="text-gray-900 text-sm font-semibold mt-4">Card Information</h2>
-              <div className="mt-4 grid grid-cols-2 gap-4 text-xs">
-                <input type="text" placeholder="Name on card*" className="border p-2 rounded w-full col-span-2" />
-                <input type="text" placeholder="Card No*" className="border p-2 rounded w-full col-span-2" />
-                <input type="text" placeholder="CVV*" className="border p-2 rounded w-full" />
-                <input type="text" placeholder="Expiration Date*" className="border p-2 rounded w-full" />
-              </div>
+  {/* Address (Street, P.O. Box) */}
+  <div className="flex flex-col w-full col-span-2">
+    <label className="text-xs font-medium text-black mb-1">
+      Address (Street, P.O. box) <span className="text-red-600">*</span>
+    </label>
+    <input type="text" placeholder="123 Main Street" className="border p-2 rounded-full w-full text-xs" />
+  </div>
+
+  {/* Address Line 2 (Optional) */}
+  <div className="flex flex-col w-full col-span-2">
+    <label className="text-xs font-medium text-black mb-1">
+      Address Line 2 (Apartment, Suite, Unit)
+    </label>
+    <input type="text" placeholder="Apt 4B" className="border p-2 rounded-full w-full text-xs" />
+  </div>
+
+  {/* City */}
+  <div className="flex flex-col w-full">
+    <label className="text-xs font-medium text-black mb-1">
+      City <span className="text-red-600">*</span>
+    </label>
+    <input type="text" placeholder="Lagos" className="border p-2 rounded-full w-full text-xs" />
+  </div>
+
+  {/* Country/Region */}
+  <div className="flex flex-col w-full">
+    <label className="text-xs font-medium text-black mb-1">
+      Country/Region <span className="text-red-600">*</span>
+    </label>
+    <input type="text" placeholder="Nigeria" className="border p-2 rounded-full w-full text-xs" />
+  </div>
+
+  {/* State/Province */}
+  <div className="flex flex-col w-full">
+    <label className="text-xs font-medium text-black mb-1">
+      State/Province <span className="text-red-600">*</span>
+    </label>
+    <input type="text" placeholder="Lagos State" className="border p-2 rounded-full w-full text-xs" />
+  </div>
+
+  {/* Postal/Zip Code */}
+  <div className="flex flex-col w-full">
+    <label className="text-xs font-medium text-black mb-1">
+      Postal/Zip Code <span className="text-red-600">*</span>
+    </label>
+    <input type="text" placeholder="100001" className="border p-2 rounded-full w-full text-xs" />
+  </div>
+</div>
+
+<hr className="my-6" />
+
+{/* Card Information */}
+<h2 className="text-gray-900 text-sm font-semibold mt-4">Card Information</h2>
+
+<div className="mt-4 grid grid-cols-2 gap-4 text-xs">
+
+  {/* Name on Card */}
+  <div className="flex flex-col w-full col-span-2">
+    <label className="text-xs font-medium text-black mb-1">
+      Name on Card <span className="text-red-600">*</span>
+    </label>
+    <input type="text" placeholder="Charles Okechukwu" className="border p-2 rounded-full w-full text-xs" />
+  </div>
+
+  {/* Card Number */}
+  <div className="flex flex-col w-full col-span-2">
+    <label className="text-xs font-medium text-black mb-1">
+      Card Number <span className="text-red-600">*</span>
+    </label>
+    <input type="text" placeholder="**** **** **** ****" className="border p-2 rounded-full w-full text-xs" />
+  </div>
+
+  {/* CVV */}
+  <div className="flex flex-col w-full">
+    <label className="text-xs font-medium text-black mb-1">
+      CVV <span className="text-red-600">*</span>
+    </label>
+    <input type="text" placeholder="123" className="border p-2 rounded-full w-full text-xs" />
+  </div>
+
+  {/* Expiration Date */}
+  <div className="flex flex-col w-full">
+    <label className="text-xs font-medium text-black mb-1">
+      Expiration Date <span className="text-red-600">*</span>
+    </label>
+    <input type="text" placeholder="MM/YY" className="border p-2 rounded-full w-full text-xs" />
+  </div>
+
+</div>
+
 
               {/* Save & Continue Button */}
               <div className="mt-8">
                 <button
                   onClick={() => console.log("Proceeding with payment")}
-                  className="bg-orange-500 text-white py-3 px-6 rounded-lg font-semibold w-full"
+                  className="bg-orange-500 text-xs text-white py-2 px-6 rounded-full font-semibold w-full"
                 >
                   Save & Continue
                 </button>

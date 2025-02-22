@@ -46,7 +46,7 @@ const OrderDetails = ({ setOpenOrder }) => {
             <button className=" bg-gray-100 text-gray-600 px-2 py-1 ml-3 rounded-xl text-xs">
               ⏰ Schedule Order  
             </button>
-            <FiLock size={31} className="bg-gray-100 px-2 mr-3  text-orange-600  rounded-full" />
+            <FiLock size={31} className="bg-gray-100 px-2 mr-3  text-orange-500  rounded-full" />
             </div>
           
           </div>
