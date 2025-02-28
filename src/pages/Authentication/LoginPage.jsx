@@ -20,7 +20,8 @@ const LoginPage = () => {
   return (
     <div className="flex min-h-screen">
       {/* Left Side - Signup Form */}
-      <div className="w-[85%] flex items-center  bg-white px-8">
+      <div className="w-[85%] flex items-center  bg-white px-8 justify-center
+      ">
         <div className="max-w-md w-full ml-14">
           <h2 className=" text-2xl font-extrabold text-black">
             Welcome

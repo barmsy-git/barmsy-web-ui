@@ -418,12 +418,13 @@ import { useState } from "react";
 import Sidebar from "../../pages/Dashboard/Sidebar";
 import TopBar from "../../pages/Dashboard/TopBar";
 import RevenueChart from "../../pages/Dashboard/RevenueChart";
-import RecentOrders from "../../pages/Dashboard/RecentOrders";
+
 import TrendingItems from "../../pages/Dashboard/TrendingItems";
 import BusinessLocations from "../Dashboard SideBar/BusinessLocations";
 import BusinessProfile from "../Dashboard SideBar/BusinessProfile";
 import Subscription from "../Dashboard SideBar/Subscription";
 import Notifications from "../Dashboard SideBar/Notifications";
+import OrderVolume from "../Dashboard/OrderVolome";
 import Settings from "../Dashboard SideBar/Settings";
 import Support from "../Dashboard SideBar/Support";
 import DashboardCard from "../../pages/Dashboard/DashboardCard";
@@ -441,9 +442,13 @@ const Dashboard = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className={`flex-1 p-6 overflow-y-auto transition-all duration-300 ${
-  isCollapsed ? "ml-16 w-[calc(100%-4rem)]" : "ml-60 w-[calc(100%-15rem)]"
+      <div className={`flex-1 p-6 transition-all duration-300 ${
+  isCollapsed ? "ml-[4rem] w-[calc(100%-4rem)]" : "ml-[15rem] w-[calc(100%-15rem)]"
 }`}>
+
+
+
+<TopBar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
 
         {activePage === "Dashboard" && (
           <>
@@ -453,7 +458,7 @@ const Dashboard = () => {
           isCollapsed ? "ml-16 w-[calc(100%-4rem)]" : "ml-64 w-[calc(100%-16rem)]"
         }`}
       >
-            <TopBar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+
             </div>
 
             {/* Dashboard Title */}
@@ -471,29 +476,43 @@ const Dashboard = () => {
 
             {/* KPI Chart & Trending Items */}
             <section className="grid grid-cols-3 gap-6 mt-6">
-              <div className="col-span-2 bg-white p-5 rounded-lg shadow-md">
-                {/* <h3 className="text-gray-700 font-semibold mb-2">Key Performance Indicator</h3> */}
-                <RevenueChart />
-              </div>
+            <div className="col-span-2 space-y-5">
+  {/* KPI Chart - No Shared Shadow */}
+  <div className="bg-white p-5 rounded-lg shadow-md">
+    <RevenueChart />
+  </div>
+
+  {/* Order Volume - Separate Shadow */}
+  <div className="bg-white rounded-md">
+    <OrderVolume />
+  </div>
+</div>
+
               <TrendingItems />
             </section>
 
             {/* Recent Orders Section */}
             <div className="mt-6">
-              <RecentOrders />
+              
             </div>
+
+         
           </>
         )}
 
         {/* Other Pages */}
+   
+
+
+
         {activePage === "Business Locations" && <BusinessLocations/>}
         {activePage === "Business Profile" && <BusinessProfile />}
         {activePage === "Subscription" && <Subscription/>}
         {activePage === "Notifications" && <Notifications/>}
         {activePage === "Settings" && <Settings/>}
         {activePage === "Support" && <Support/>}
+        </div>
       </div>
-    </div>
   );
 };
 

@@ -69,3 +69,20 @@ select:focus option:checked {
   background-color: white !important;
   color: gray !important;
 }
+
+  .react-calendar__navigation {
+    display: flex;
+    justify-content: center !important; /* Center the month title */
+  }
+  .react-calendar__navigation button {
+    position: relative !important;
+    z-index: 10 !important;
+  }
+
+  /* Hide big double arrows inside the calendar */
+
+.react-calendar__navigation button:nth-child(1), 
+.react-calendar__navigation button:nth-child(5) {
+  display: none !important; /* Hides the big double arrows */
+}
+

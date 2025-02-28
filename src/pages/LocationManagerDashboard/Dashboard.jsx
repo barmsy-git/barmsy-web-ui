@@ -1,0 +1,117 @@
+import { useState } from "react";
+import Sidebar from "../../pages/LocationManagerDashboard/Sidebar";
+import TopBar from "../../pages/Dashboard/TopBar";
+import RatingChart from "../../pages/LocationManagerDashboard/RatingChart";
+import OrderedItems from "../../pages/LocationManagerDashboard/OrderedItems";
+
+import TrendingItems from "../../pages/Dashboard/TrendingItems";
+import KpiChart from "../../pages/LocationManagerDashboard/KpiChart"
+import OrderItem from "../../pages/LocationManagerDashboard/OrderItem"
+import BusinessLocations from "../Dashboard SideBar/BusinessLocations";
+import BusinessProfile from "../Dashboard SideBar/BusinessProfile";
+import Subscription from "../Dashboard SideBar/Subscription";
+import Notifications from "../Dashboard SideBar/Notifications";
+import OrderVolume from "../Dashboard/OrderVolome";
+import Settings from "../Dashboard SideBar/Settings";
+import Support from "../Dashboard SideBar/Support";
+import DashboardCard from "../../pages/Dashboard/DashboardCard";
+
+const Dashboard = () => {
+  const [activePage, setActivePage] = useState("Dashboard");
+    const [isCollapsed, setIsCollapsed] = useState(false);
+
+  return (
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
+      <div className={`transition-all duration-300 fixed h-full ${isCollapsed ? "w-16" : "w-60"}`}>
+
+        <Sidebar activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
+      </div>
+
+  {/* Main Content Area */}
+<div className={`flex-1 p-6 transition-all duration-300 ${
+  isCollapsed ? "ml-[4rem] w-[calc(100%-4rem)]" : "ml-[15rem] w-[calc(100%-15rem)]"
+}`}>
+
+
+
+
+<TopBar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+
+        {activePage === "Dashboard" && (
+          <>
+            {/* Top Bar */}
+            <div className={`flex-1 p-6 transition-all duration-300 ${
+  isCollapsed ? "ml-[4rem] w-[calc(100%-4rem)]" : "ml-[15rem] w-[calc(100%-15rem)]"
+}`}>
+
+
+            </div>
+
+            {/* Dashboard Title */}
+          {/* Dashboard Title */}
+<header className="mb-2 relative z-10 pt-6
+">
+  <h2 className="text-2xl font-semibold text-gray-900">Dashboard</h2>
+</header>
+
+
+            <div className="flex justify-between">
+                {/* KPI Section */}
+            <section className="mt-3 w-full mr-3 ">
+              <KpiChart />
+            </section>
+            <section className="mt-3 ">
+            <OrderItem/>
+            </section>
+            </div>
+
+
+
+
+            <section className="flex justify-between mt-6 gap-6 w-full">
+  {/* Rating Chart */}
+  <div className="bg-white p-5 rounded-lg shadow-md flex-1 h-full">
+    <RatingChart />
+  </div>
+
+  {/* Ordered Items */}
+  <div className="bg-white rounded-lg shadow-md flex-1 h-full">
+    <OrderedItems />
+  </div>
+
+  {/* Trending Items - Make sure it adjusts dynamically */}
+  <div className="bg-white rounded-lg shadow-md flex-1 h-full">
+    <TrendingItems />
+  </div>
+</section>
+
+
+            {/* Recent Orders Section */}
+            <div className="mt-6">
+              
+            </div>
+
+         
+          </>
+        )}
+
+        {/* Other Pages */}
+   
+
+
+
+        {activePage === "Business Locations" && <BusinessLocations/>}
+        {activePage === "Business Profile" && <BusinessProfile />}
+        {activePage === "Subscription" && <Subscription/>}
+        {activePage === "Notifications" && <Notifications/>}
+        {activePage === "Settings" && <Settings/>}
+        {activePage === "Support" && <Support/>}
+        </div>
+      </div>
+  );
+};
+
+export default Dashboard;
+
+

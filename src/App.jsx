@@ -17,6 +17,8 @@ import OnboardingSteps9 from "./pages/Onboarding/OnboardingSteps9.jsx";
 import OnboardingBillingPage from "./pages/Onboarding/OnboardinBillingPage.jsx";
 import OnboardingBillingDashboardPage from "./pages/Onboarding/OnboardinBillingDashboardPage.jsx";
 import DashboardPage from "./pages/Dashboard/Dashboard.jsx";
+import MerchantLocationDashboardPage from "./pages/MerchantLocationDashboard/Dashboard.jsx"
+import LocationManagerDashboardPage from "./pages/LocationManagerDashboard/Dashboard.jsx"
 import PricingPage from "./pages/Onboarding/PricingPage.jsx";
 import LoadingPage from "./pages/Authentication/LoadingPage.jsx";
 import CodeExpiredPage from "./pages/Authentication/CodeExpiredPage.jsx";
@@ -143,6 +145,22 @@ function App() {
               element={
                 
                   <DashboardPage />
+                
+              }
+            /> 
+           <Route
+              path="/merchant-dashboard"
+              element={
+                
+                  <MerchantLocationDashboardPage />
+                
+              }
+            /> 
+           <Route
+              path="/Location-Manager-dashboard"
+              element={
+                
+                  <LocationManagerDashboardPage />
                 
               }
             /> 

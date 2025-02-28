@@ -3,7 +3,7 @@ import { MdSubscriptions } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import logo from "../../../public/iconoir_organic-food.svg"
 import Dashboard from "../../Assets/Dashboard.png";
-import Locations from "../../Assets/Locations.png"
+
 import Profile from "../../Assets/Profile.png";
 import Subscriptions from "../../Assets/Subscriptions.png";
 import Notifications from "../../Assets/Nitifications.png";
@@ -26,7 +26,7 @@ const Sidebar = ({icon, activePage, setActivePage, isCollapsed }) => {
           <ul className="text-sm">
             <div className="pt-10 p-4">
               <SidebarItem icon={<img src={Dashboard} alt="Dashboard" className="h-5 w-5" />} label="Dashboard" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
-              <SidebarItem icon={<img src={Locations} alt="Dashboard" className="h-5 w-5" />} label="Business Locations" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
+           
               <SidebarItem icon={<img src={Profile} alt="Dashboard" className="h-5 w-5" />} label="Business Profile" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
               <SidebarItem icon={<img src={Subscriptions} alt="Dashboard" className="h-5 w-5" />} label="Subscription" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
             </div>
