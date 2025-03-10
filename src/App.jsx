@@ -15,6 +15,8 @@ import OnboardingSteps7 from "./pages/Onboarding/OnboardingSteps7.jsx";
 import OnboardingSteps8 from "./pages/Onboarding/OnboardingSteps8.jsx";
 import OnboardingSteps9 from "./pages/Onboarding/OnboardingSteps9.jsx";
 import OnboardingBillingPage from "./pages/Onboarding/OnboardinBillingPage.jsx";
+import OnboardingSummary from "./pages/Onboarding/OnboardingSummary.jsx";
+// import LocationOwnerPage from "./pages/LocationOwnerPage/Dashboard.jsx"
 import OnboardingBillingDashboardPage from "./pages/Onboarding/OnboardinBillingDashboardPage.jsx";
 import DashboardPage from "./pages/Dashboard/Dashboard.jsx";
 import MerchantLocationDashboardPage from "./pages/MerchantLocationDashboard/Dashboard.jsx"
@@ -141,6 +143,14 @@ function App() {
               }
             /> 
            <Route
+              path="/onboarding-summary"
+              element={
+                
+                  <OnboardingSummary />
+                
+              }
+            /> 
+           <Route
               path="/dashboard"
               element={
                 
@@ -163,7 +173,17 @@ function App() {
                   <LocationManagerDashboardPage />
                 
               }
-            /> 
+              />
+
+           {/* <Route
+              path="/Location-Owner"
+              element={
+                
+                  <LocationOwnerPage />
+                
+              }
+            />  */}
+            
           
            <Route
               path="/pricing"

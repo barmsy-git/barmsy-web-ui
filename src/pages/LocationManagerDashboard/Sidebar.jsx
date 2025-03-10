@@ -3,9 +3,12 @@ import { MdSubscriptions } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import logo from "../../../public/iconoir_organic-food.svg"
 import Dashboard from "../../Assets/Dashboard.png";
-import Locations from "../../Assets/Locations.png"
-import Profile from "../../Assets/Profile.png";
-import Subscriptions from "../../Assets/Subscriptions.png";
+import GenerateBarcode from "../../Assets/Barcodes.png"
+import Products from "../../Assets/Products.png";
+import Orders from "../../Assets/Orders.png";
+import Reports from "../../Assets/Report.png";
+import InventoryManagement from "../../Assets/Inventory.png";
+import Reservation from "../../Assets/Reservation.png";
 import Notifications from "../../Assets/Nitifications.png";
 import Settings from "../../Assets/Settings.png";
 import Support from "../../Assets/Support.png";
@@ -23,12 +26,15 @@ const Sidebar = ({icon, activePage, setActivePage, isCollapsed }) => {
   
         {/* Navigation Items */}
         <nav className="flex-1 mt-20">
-          <ul className="text-sm">
+          <ul className="text-[10px]">
             <div className="pt-10 p-4">
               <SidebarItem icon={<img src={Dashboard} alt="Dashboard" className="h-5 w-5" />} label="Dashboard" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
-              <SidebarItem icon={<img src={Locations} alt="Dashboard" className="h-5 w-5" />} label="Business Locations" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
-              <SidebarItem icon={<img src={Profile} alt="Dashboard" className="h-5 w-5" />} label="Business Profile" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
-              <SidebarItem icon={<img src={Subscriptions} alt="Dashboard" className="h-5 w-5" />} label="Subscription" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
+              <SidebarItem icon={<img src={GenerateBarcode} alt="Dashboard" className="h-5 w-5" />} label="Generate Barcode" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
+              <SidebarItem icon={<img src={Products} alt="Dashboard" className="h-5 w-5" />} label="Products" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
+              <SidebarItem icon={<img src={Orders} alt="Dashboard" className="h-5 w-5" />} label="Orders" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
+              <SidebarItem icon={<img src={Reports} alt="Dashboard" className="h-5 w-5" />} label="Reports" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
+              <SidebarItem icon={<img src={InventoryManagement} alt="Dashboard" className="h-5 w-5" />} label="Inventory Management" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
+              <SidebarItem icon={<img src={Reservation} alt="Dashboard" className="h-5 w-5" />} label="Reservation" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
             </div>
   
             <hr className="my-2 w-full border-gray-200" />

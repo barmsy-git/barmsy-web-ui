@@ -8,8 +8,7 @@ const trendingData = [
   { id: 2, name: "Jollof Rice", price: "N2,000", },
   { id: 3, name: "Jollof Rice", price: "N2,000", },
   { id: 4, name: "Jollof Rice", price: "N2,000", },
-  { id: 5, name: "Jollof Rice", price: "N2,000", },
-  { id: 6, name: "Jollof Rice", price: "N2,000", },
+
 ];
 
 // const OrderedItems = () => {
@@ -99,7 +98,7 @@ const trendingData = [
 
 const OrderedItems = () => {
     return (
-      <div className="bg-white p-4 rounded-lg shadow-md h-full"> {/* Ensure full height */}
+      <div className="h-full"> {/* Ensure full height */}
         {/* Header Section */}
         <div className="flex justify-between items-center">
          <div>

@@ -4,12 +4,16 @@ import TopBar from "../../pages/Dashboard/TopBar";
 import RatingChart from "../../pages/LocationManagerDashboard/RatingChart";
 import OrderedItems from "../../pages/LocationManagerDashboard/OrderedItems";
 
-import TrendingItems from "../../pages/Dashboard/TrendingItems";
+import Order from "../../pages/LocationManagerDashboard/Orders";
 import KpiChart from "../../pages/LocationManagerDashboard/KpiChart"
 import OrderItem from "../../pages/LocationManagerDashboard/OrderItem"
-import BusinessLocations from "../Dashboard SideBar/BusinessLocations";
-import BusinessProfile from "../Dashboard SideBar/BusinessProfile";
-import Subscription from "../Dashboard SideBar/Subscription";
+import GenerateBarcode from "../Dashboard SideBar/GenerateBarcode";
+import Products from "../Dashboard SideBar/Products";
+import Orders from "../Dashboard SideBar/Orders";
+import Reports from "../Dashboard SideBar/Reports";
+import InventoryManagement from "../Dashboard SideBar/InventoryManagement";
+import Reservation from "../Dashboard SideBar/Reservation";
+
 import Notifications from "../Dashboard SideBar/Notifications";
 import OrderVolume from "../Dashboard/OrderVolome";
 import Settings from "../Dashboard SideBar/Settings";
@@ -29,10 +33,10 @@ const Dashboard = () => {
       </div>
 
   {/* Main Content Area */}
-<div className={`flex-1 p-6 transition-all duration-300 ${
+  
+  <div className={`flex-1 p-6 transition-all duration-300 ${
   isCollapsed ? "ml-[4rem] w-[calc(100%-4rem)]" : "ml-[15rem] w-[calc(100%-15rem)]"
 }`}>
-
 
 
 
@@ -41,9 +45,11 @@ const Dashboard = () => {
         {activePage === "Dashboard" && (
           <>
             {/* Top Bar */}
-            <div className={`flex-1 p-6 transition-all duration-300 ${
-  isCollapsed ? "ml-[4rem] w-[calc(100%-4rem)]" : "ml-[15rem] w-[calc(100%-15rem)]"
-}`}>
+            <div
+        className={`flex-1 p-6 overflow-y-auto transition-all duration-300 ${
+          isCollapsed ? "ml-16 w-[calc(100%-4rem)]" : "ml-64 w-[calc(100%-16rem)]"
+        }`}
+      >
 
 
             </div>
@@ -56,12 +62,12 @@ const Dashboard = () => {
 </header>
 
 
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-wrap min-w-0">
                 {/* KPI Section */}
-            <section className="mt-3 w-full mr-3 ">
+            <section className="mt-3 w-[63%]  mr-3 ">
               <KpiChart />
             </section>
-            <section className="mt-3 ">
+            <section className="mt-3 flex-1 min-w-0">
             <OrderItem/>
             </section>
             </div>
@@ -69,22 +75,23 @@ const Dashboard = () => {
 
 
 
-            <section className="flex justify-between mt-6 gap-6 w-full">
+            <section className="flex justify-between mt-6 gap-6 w-full h-[350px]">
   {/* Rating Chart */}
-  <div className="bg-white p-5 rounded-lg shadow-md flex-1 h-full">
+  <div className="bg-white p-5 rounded-lg shadow-md flex-1  flex flex-col">
     <RatingChart />
   </div>
 
   {/* Ordered Items */}
-  <div className="bg-white rounded-lg shadow-md flex-1 h-full">
+  <div className="bg-white p-5 rounded-lg shadow-md flex-1 flex flex-col">
     <OrderedItems />
   </div>
 
-  {/* Trending Items - Make sure it adjusts dynamically */}
-  <div className="bg-white rounded-lg shadow-md flex-1 h-full">
-    <TrendingItems />
+  {/* Trending Items */}
+  <div className="bg-white p-5 rounded-lg shadow-md flex-1  flex flex-col">
+    <Order />
   </div>
 </section>
+
 
 
             {/* Recent Orders Section */}
@@ -101,9 +108,12 @@ const Dashboard = () => {
 
 
 
-        {activePage === "Business Locations" && <BusinessLocations/>}
-        {activePage === "Business Profile" && <BusinessProfile />}
-        {activePage === "Subscription" && <Subscription/>}
+        {activePage === "Generate Barcode" && <GenerateBarcode/>}
+        {activePage === "Products" && <Products />}
+        {activePage === "Orders" && <Orders/>}
+        {activePage === "Reports" && <Reports/>}
+        {activePage === "Inventory Management" && <InventoryManagement/>}
+        {activePage === "Reservation" && <Reservation/>}
         {activePage === "Notifications" && <Notifications/>}
         {activePage === "Settings" && <Settings/>}
         {activePage === "Support" && <Support/>}

@@ -44,18 +44,21 @@ const Revenue = () => {
       {/* Bar Chart */}
       <div className="flex-1 min-w-0 h-40">
 
-        <Bar
-          data={data}
-          options={{
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-              x: { grid: { display: false }, ticks: { font: { size: 12 } } },
-              y: { grid: { display: false }, ticks: { display: false } }, // 🔹 Removed y-axis numbers
-            },
-          }}
-        />
+      <Bar
+  data={data}
+  options={{
+    responsive: true,
+    maintainAspectRatio: false, // Ensures it resizes properly
+    animation: { duration: 0 }, // Prevents lag during resizing
+    resize: true, // Forces resizing when the parent container changes
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 12 } } },
+      y: { grid: { display: false }, ticks: { display: false } },
+    },
+  }}
+/>
+
       </div>
 
     <div className="flex justify-start mt-2">
