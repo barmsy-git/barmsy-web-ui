@@ -501,35 +501,49 @@ const OrdersPage = () => {
                         filteredOrders.map((order) => (
                           <div 
                             key={order.id} 
-                            className={`p-3 rounded-lg shadow-sm ${
-                              status === "All" ? "bg-[#f7f6f6]" : "bg-white"
+                            className={`p-3 rounded-lg shadow-sm   ${
+                              status === "All" ? "bg-[#f7f6f6]" : "bg-white "
                             } w-full`}
                           >
-                            <h3 className="text-xs text-gray-500">{order.table} {order.name}</h3>
-                            <div className="flex justify-start pt-1">
-                              <p className="text-xs text-gray-600 flex items-center text-[7px] rounded-full pl-2 pr-2 border mr-1 space-x-2">
-                                <img src={cultlaries} alt="" className="h-2 w-2 mr-1" />
-                                {order.guests}
-                                <img src={drinks} alt="" className="h-2 w-2" />
-                                {order.drinks}
-                              </p>
-                              <p className="text-xs text-gray-600 flex text-[7px] rounded-full pl-1 pr-1 border">
-                                <img src={dollar} alt="dollar" className="h-2 w-2 mr-1 mt-1" /> ₦{order.amount}
-                              </p>
-                            </div>
-                            <div className="flex justify-start mt-1 items-center">
-                              <p className="text-sm text-gray-600 flex bg-gray-100 pl-2 pr-2 rounded-full text-[7px]">
-                                <img src={solar_delivery} alt="" className="h-3 w-3 mr-1 mt-1" />
-                                Serve at {order.time}
-                              </p>
-                              <span className={`flex items-center px-2 py-1 text-[7px] rounded-full ${
-                                  order.paid ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"
-                                }`}
-                              >
-                                <img src={order.paid ? paid : notPaid} alt={order.paid ? "Paid" : "Not Paid"} className="w-3 h-3 mr-1" />
-                                {order.paid ? "Paid" : "Not Paid"}
-                              </span>
-                            </div>
+                            <h3
+  className={`text-xs ${
+    status === "All" ? "text-gray-400 font-semibold" : "text-black font-semibold"
+  }`}
+>
+  {order.table} {order.name}
+</h3>
+
+<div className="flex justify-start pt-1">
+  <p className={`text-[10px] flex items-center rounded-full pl-2 pr-2 border mr-1 space-x-2 ${
+    status === "All" ? "text-gray-400" : "text-black"
+  }`}>
+    <img src={cultlaries} alt="" className="h-2 w-2 mr-1" />
+    {order.guests}
+    <img src={drinks} alt="" className="h-2 w-2 space-x-2" />
+    {order.drinks}
+  </p>
+  <p className={`text-xs flex rounded-full pl-1 pr-1 border ${
+    status === "All" ? "text-gray-400" : "text-black"
+  }`}>
+    <img src={dollar} alt="dollar" className="h-4 w-4 mr-1" /> ₦{order.amount}
+  </p>
+</div>
+
+<div className="flex justify-start mt-1 items-center space-x-2">
+  <p className={`text-[10px] flex bg-gray-100 pl-2 pr-2 pt-1 rounded-full ${
+    status === "All" ? "text-gray-400" : "text-black"
+  }`}>
+    <img src={solar_delivery} alt="" className="h-3 w-3 mr-1 mb-2" />
+    Serve at {order.time}
+  </p>
+  <span className={`flex items-center px-2 py-1 text-[10px] rounded-full ${
+    order.paid ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"
+  }`}>
+    <img src={order.paid ? paid : notPaid} alt={order.paid ? "Paid" : "Not Paid"} className="w-3 h-3 mr-1" />
+    {order.paid ? "Paid" : "Not Paid"}
+  </span>
+</div>
+
                           </div>
                         ))
                       ) : (
@@ -543,10 +557,38 @@ const OrdersPage = () => {
         </>
       ) : (
         // Empty Page for Table View
-        <div >
-          <OrderTablePage/>
-        </div>
+        // <div >
+        //   <OrderTablePage/>
+        // </div>
+        null
       )}
+    {viewMode === "Table" ? (
+  <div>
+    {/* Status Tabs for Table View */}
+    <div className="flex px-2 py-2 items-center space-x-6 -ml-2 mt-2">
+      {statusTabs.map((tab) => (
+        <div
+          key={tab}
+          className={`flex items-center px-3 py-1 rounded-full cursor-pointer ${
+            selectedTab === tab ? "bg-white text-black" : "border border-gray-300"
+          }`}
+          onClick={() => setSelectedTab(tab)}
+        >
+          <span className="text-[10px]">{tab}</span>
+          <span className="bg-orange-500 text-white text-[8px] w-4 h-4 flex items-center justify-center rounded-full ml-2">
+            {orderCounts[tab]}
+          </span>
+        </div>
+      ))}
+    </div>
+
+    {/* Table View */}
+    <OrderTablePage selectedTab={selectedTab} ordersData={ordersData} />
+  </div>
+) : (
+ null
+)}
+
     </div>
   );
 }  

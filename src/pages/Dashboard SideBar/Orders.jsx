@@ -6,7 +6,7 @@ import OrderTablePage from "../LocationManagerDashboard/Order/OrderTable"
 function Orders() {
   return (
     <div><OrderPage/>
-    <OrderTablePage/>
+    {/* <OrderTablePage/> */}
     </div>
    
   )

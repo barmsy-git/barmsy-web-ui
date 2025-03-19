@@ -94,11 +94,13 @@ import rightArrow from "../../../Assets/rightArrow.png"
 import leftArrow from "../../../Assets/leftArrow.png"
 import downArrow from "../../../Assets/downArrow.png"
 import whiteRightArrow from "../../../Assets/whiteRightArrow.png"
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ isCollapsed }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const formRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const navigate = useNavigate();
 
   const reservations = [
     { name: "Onah Sochim", amount: "N2,000", persons: "2 Persons" },
@@ -132,8 +134,10 @@ const Header = ({ isCollapsed }) => {
         <div className="relative">
           <h2
             className="flex justify-between text-white bg-orange-500 rounded-full px-4 py-2 text-xs gap-2 cursor-pointer"
-            onClick={() => setIsFormOpen(!isFormOpen)}
+            onClick={() => navigate("/")}
+            
           >
+           
             Food Menu
             <span className=" text-white">
               {/* <HiArrowRight size={8} /> */}
@@ -195,12 +199,12 @@ const Header = ({ isCollapsed }) => {
               <span className="w-3 h-3 rounded-full bg-yellow-500"></span>
               <span>Available Soon</span>
             </div>
-            <div className="flex items-center space-x-1">
+            {/* <div className="flex items-center space-x-1">
               <span className="w-3 h-3 rounded-full bg-gray-400"></span>
               <span>Not Occupied</span>
-            </div>
+            </div> */}
             <div className="flex items-center space-x-1">
-              <FaRegClock className="text-gray-500" />
+              <FaRegClock className="text-gray-500 cursor-pointer "  onClick={() => setIsFormOpen(!isFormOpen)} />
             </div>
           </div>
          

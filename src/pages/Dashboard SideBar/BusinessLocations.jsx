@@ -193,6 +193,9 @@ const BusinessLocations = () => {
       <td className="p-3 text-[10px] font-semibold">{location.state}</td>
       <td className="p-3 text-[10px] font-semibold">{location.country}</td>
 
+
+    
+
       {/* Profiles Column  */}
       <td className="p-3 text-[10px] font-semibold text-center flex items-center justify-center">
         <img src={count} alt="" className="h-4 w-4 rounded-full mr-2" />
@@ -235,6 +238,7 @@ const BusinessLocations = () => {
           </button>
         </div>
       </div>
+      
     </div>
   );
 };
