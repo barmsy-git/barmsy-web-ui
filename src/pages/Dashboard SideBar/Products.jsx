@@ -1,9 +1,11 @@
 import React from 'react'
+import Products from "../LocationManagerDashboard/Products/Products.jsx"
 
-function Products() {
+function Product({isCollapsed}) {
   return (
-    <div>Products</div>
+    <div className='mt-12 '><Products isCollapsed={isCollapsed} />
+</div>
   )
 }
 
-export default Products
+export default Product

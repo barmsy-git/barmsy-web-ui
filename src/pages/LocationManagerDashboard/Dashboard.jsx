@@ -109,7 +109,11 @@ const Dashboard = () => {
 
 
         {activePage === "Generate Barcode" && <GenerateBarcode/>}
-        {activePage === "Products" && <Products />}
+        <div className={`flex-1 transition-all duration-300 ${
+  isCollapsed ? "ml-[4rem]" : "ml-[15rem]"
+}`}>
+        {activePage === "Products" && <Products isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />}
+        </div>
         {activePage === "Orders" && <Orders/>}
         {activePage === "Reports" && <Reports/>}
         {activePage === "Inventory Management" && <InventoryManagement/>}
