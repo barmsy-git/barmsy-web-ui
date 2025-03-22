@@ -11,7 +11,7 @@ import notPaid from "../../../Assets/notPaid.png";
 
 import img from "../../../Assets/myImage.jpg"; 
 
-const ProductTable = ({ selectedTab, ordersData }) => {
+const CategorySection = ({ selectedTab, ordersData }) => {
     // const filteredOrders =
     //   selectedTab === "All"
     //     ? ordersData
@@ -20,15 +20,16 @@ const ProductTable = ({ selectedTab, ordersData }) => {
       const [showModal, setShowModal] = useState(false);
       const [selectedProduct, setSelectedProduct] = useState(null);
       const [selectedRows, setSelectedRows] = useState(new Set()); // Track selected checkboxes
-    
+      const [expandedRows, setExpandedRows] = useState(new Set()); // Track expanded rows
+
       const locationsPerPage = 12;
       const [locations, setLocations] = useState(
         Array.from({ length: 1253 }, (_, i) => ({
           id: i + 1,
-          Image: img,
-          category: "Pasta",
-          subcategory: "Pasta",
-          price: "2,000",
+          Name: "Sochima Onah",
+          Product: "Pasta",
+         
+          
           created: "12:05 AM",
           
           status: true,
@@ -89,7 +90,11 @@ const ProductTable = ({ selectedTab, ordersData }) => {
       };
 
   
-  
+      const toggleRowExpand = (id) => {
+        const updatedRows = new Set(expandedRows);
+        updatedRows.has(id) ? updatedRows.delete(id) : updatedRows.add(id);
+        setExpandedRows(updatedRows);
+      };
 
   return (
     <div className="">
@@ -125,139 +130,152 @@ const ProductTable = ({ selectedTab, ordersData }) => {
            )}
      
            {/* Table Container */}
-         
-          
-             <table className="w-full text-xs text-left text-gray-600">
-             <thead className="bg-gray-50 border-b">
-       <tr>
-         <th className="p-3 text-center">#</th>
-     
-         {/* Updated "Select All" Checkbox Column */}
-         <th className="p-3 text-center">
-           <label className="cursor-pointer flex items-center justify-center">
-             <input
-               type="checkbox"
-               className="peer hidden"
-               onChange={toggleSelectAll}
-               checked={selectedRows.size === currentLocations.length}
-             />
-             <div className="w-3 h-3 border border-gray-400  flex items-center justify-center peer-checked:bg-orange-500 peer-checked:border-orange-500">
-               {selectedRows.size === currentLocations.length && (
-                 <svg
-                   className="w-3 h-3 text-white"
-                   viewBox="0 0 24 24"
-                   fill="none"
-                   stroke="currentColor"
-                   strokeWidth="3"
-                   strokeLinecap="round"
-                   strokeLinejoin="round"
-                 >
-                   <polyline points="20 6 9 17 4 12" />
-                 </svg>
-               )}
-             </div>
-           </label>
-         </th>
-     
-         
-         <th className="p-3 text-center w-[14.28%]">Image</th>
-      <th className="p-3 text-center w-[14.28%]">Category</th>
-      <th className="p-3 text-center w-[14.28%]">Subcategory</th>
-      <th className="p-3 text-center w-[14.28%]">Price</th>
-      <th className="p-3 text-center w-[14.28%]">Created</th>
-      <th className="p-3 text-center w-[14.28%]">Status</th>
-      <th className="p-3 text-center w-[14.28%]">Actions</th>
-</tr>
+           <table className="w-full text-xs text-left text-gray-600">
+  <thead className="bg-gray-50 border-b">
+    <tr>
+      {/* "Select All" Checkbox in Header */}
+      <th className="p-2 text-center w-[5%]">
+        <label className="cursor-pointer flex items-center justify-center">
+          <input
+            type="checkbox"
+            className="peer hidden"
+            onChange={toggleSelectAll} // Function to toggle all checkboxes
+            checked={selectedRows.size === currentLocations.length}
+          />
+          <div className="w-3 h-3 border border-gray-400 flex items-center justify-center ml-24  peer-checked:bg-orange-500 peer-checked:border-orange-500">
+            {selectedRows.size === currentLocations.length && (
+              <svg
+                className="w-3 h-3 text-white"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            )}
+          </div>
+        </label>
+      </th>
 
-     </thead>
-     
-     
-     
-               
-               
-               <tbody>
-       {currentLocations.map((location) => (
-         <tr key={location.id} className="border-b hover:bg-gray-50">
-           <td className="p-3 text-center">{location.id}</td>
-     
-          
-           <td className="p-3 text-center">
-             <label className="cursor-pointer flex items-center justify-center">
-               <input
-                 type="checkbox"
-                 className="peer hidden"
-                 checked={selectedRows.has(location.id)}
-                 onChange={() => toggleRowSelection(location.id)}
-               />
-               <div className="w-3 h-3 border border-gray-400  flex items-center justify-center peer-checked:bg-orange-500 peer-checked:border-orange-500">
-                 {selectedRows.has(location.id) && (
-                   <svg
-                     className="w-3 h-3 text-white"
-                     viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     strokeWidth="3"
-                     strokeLinecap="round"
-                     strokeLinejoin="round"
-                   >
-                     <polyline points="20 6 9 17 4 12" />
-                   </svg>
-                 )}
-               </div>
-             </label>
-           </td>
-     
-         
-          
-        
-           <td className="p-3 text-center w-[14.28%]">
-          <img src={location.Image} alt="Customer" className="w-6 h-6 rounded-md mx-auto" />
+      <th className="p-3 text-center w-[20%] pr-36">Name</th>
+      <th className="p-3 text-center w-[20%]">Product</th>
+      <th className="p-3 text-center w-[15%]">Created</th>
+      <th className="p-3 text-center w-[15%]">Status</th>
+      <th className="p-3 text-center w-[15%]">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {currentLocations.map((location) => (
+    <React.Fragment key={location.id}>
+      {/* Main Row */}
+      <tr className="hover:bg-gray-50">
+        <td colSpan="100%" className="p-2">
+          <div
+            className={`border border-dashed rounded-full p-2 flex flex-col w-full transition-all ${
+              expandedRows.has(location.id) ? "pb-4" : ""
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              {/* Expand/Collapse Button */}
+              <button
+                onClick={() => toggleRowExpand(location.id)}
+                className="text-xs focus:outline-none w-[5%] flex justify-center"
+              >
+                {expandedRows.has(location.id) ? "▲" : "▼"}
+              </button>
+
+              {/* Checkbox (Closer to Name) */}
+              <label className="cursor-pointer flex items-center justify-center w-[5%]">
+                <input
+                  type="checkbox"
+                  className="peer hidden"
+                  checked={selectedRows.has(location.id)}
+                  onChange={() => toggleRowSelection(location.id)}
+                />
+                <div className="w-4 h-4 border border-gray-400 flex items-center justify-center peer-checked:bg-orange-500 peer-checked:border-orange-500">
+                  {selectedRows.has(location.id) && (
+                    <svg
+                      className="w-3 h-3 text-white"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  )}
+                </div>
+              </label>
+
+              {/* Name */}
+              <span className="text-[10px] font-semibold text-left w-[20%] pl-2">
+                {location.Name}
+              </span>
+
+              {/* Product */}
+              <span className="text-[10px] font-semibold text-center w-[20%]">
+                {location.Product}
+              </span>
+
+              {/* Created */}
+              <span className="text-[10px] font-semibold text-center w-[15%]">
+                {location.created}
+              </span>
+
+              {/* Status Toggle */}
+              <div className="flex justify-center w-[15%]">
+                <button
+                  className={`relative w-9 h-3 flex items-center rounded-full transition ${
+                    location.status ? "bg-orange-500" : "bg-gray-300"
+                  }`}
+                  onClick={() => toggleStatus(location.id)}
+                >
+                  <span
+                    className={`absolute left-1 w-2 h-2 bg-white rounded-full transition-transform ${
+                      location.status ? "translate-x-5" : "translate-x-0"
+                    }`}
+                  ></span>
+                </button>
+              </div>
+
+              {/* Actions */}
+              <div className="flex justify-center space-x-3 w-[15%]">
+                <button>
+                  <img src={edit} className="h-4 w-4" alt="Edit" />
+                </button>
+                <button onClick={() => handleDeleteClick(location)}>
+                  <img src={deleteButton} className="h-4 w-4" alt="Delete" />
+                </button>
+              </div>
+            </div>
+
+            {/* Expanded Content (Only Visible When Open) */}
+            {expandedRows.has(location.id) && (
+              <div className="mt-2 p-2 border-t border-dashed flex flex-col space-y-2">
+                <span className="text-[10px] font-semibold">
+                  **Subcategory:** {location.subcategory}
+                </span>
+                <span className="text-[10px]">More details can go here...</span>
+              </div>
+            )}
+          </div>
         </td>
-        <td className="p-3 text-[10px] font-semibold text-center w-[14.28%]">{location.category}</td>
-        <td className="p-3 text-[10px] font-semibold text-center w-[14.28%]">{location.subcategory}</td>
-        <td className="p-3 text-[10px] font-semibold text-center w-[14.28%]">{location.price}</td>
-        <td className="p-3 text-[10px] font-semibold text-center w-[14.28%]">{location.created}</td>
+      </tr>
+    </React.Fragment>
+  ))}
+</tbody>
 
-                {/* <td className="p-3 text-[10px] font-semibold">{location.status}</td> */}
-                <td className="p-3 text-center w-[14.28%]">
-  <div className="flex justify-center">
-    <button
-      className={`relative w-9 h-3 flex items-center rounded-full transition ${
-        location.status ? "bg-orange-500" : "bg-gray-300"
-      }`}
-      onClick={() => toggleStatus(location.id)}
-    >
-      <span
-        className={`absolute left-1 w-2 h-2 bg-white rounded-full transition-transform ${
-          location.status ? "translate-x-5" : "translate-x-0"
-        }`}
-      ></span>
-    </button>
-  </div>
-</td>
+</table>
 
 
-                {/* <td className="p-3 text-[10px] font-semibold">{location.paid}</td> */}
-    
-     
-           {/* Actions Column  */}
-           <td className="p-3 text-[10px] font-semibold items-end">
-             <div className="flex justify-center space-x-3">
-               <button>
-                 <img src={edit} className="h-4 w-4" alt="" />
-               </button>
-               <button onClick={() => handleDeleteClick(location)}>
-                 <img src={deleteButton} className="h-4 w-4" alt="" />
-               </button>
-             </div>
-           </td>
-         </tr>
-       ))}
-     </tbody>
-     
-     
-     
-             </table>
+
+
      
      
            </div>
@@ -316,4 +334,4 @@ const ProductTable = ({ selectedTab, ordersData }) => {
   );
 }
 
-export default ProductTable;
+export default CategorySection;

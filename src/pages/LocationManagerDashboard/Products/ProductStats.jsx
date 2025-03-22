@@ -17,7 +17,7 @@ const ProductStats = () => {
     return (
       <div className="grid grid-cols-4 gap-4">
         {stats.map((stat, index) => (
-          <div key={index} className="p-4 bg-white shadow-md rounded-lg flex items-center space-x-4">
+          <div key={index} className="p-4 bg-white  py-4 shadow-md rounded-lg flex items-center space-x-4">
             <div className={`w-10 h-10 flex items-center justify-center rounded-full ${stat.color}`}>
               <span className="text-lg">{stat.icon}</span>
             </div>
