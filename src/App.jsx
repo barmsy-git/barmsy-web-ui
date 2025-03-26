@@ -1,14 +1,11 @@
-import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { HomePage } from "./Routes.js";
-import { ToastContainer } from "react-toastify";
-
-function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-    </Routes>
-  );
+import AppRouter from "./Router"
+import { GlobalStateProvider } from "./context/GlobalStateProvider";
+function App(){
+  return(
+    <GlobalStateProvider>
+      <AppRouter />
+    </GlobalStateProvider>
+  )
 }
 
-export default App;
+export default App
