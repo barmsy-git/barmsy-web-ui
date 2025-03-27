@@ -8,6 +8,7 @@ import Order from "../../pages/LocationManagerDashboard/Orders";
 import KpiChart from "../../pages/LocationManagerDashboard/KpiChart"
 import OrderItem from "../../pages/LocationManagerDashboard/OrderItem"
 import GenerateBarcode from "../Dashboard SideBar/GenerateBarcode";
+import Subscriptions from "../../pages/LocationManagerDashboard/Subscriptions/Subscriptions";
 import Products from "../Dashboard SideBar/Products";
 import Orders from "../Dashboard SideBar/Orders";
 import Reports from "../Dashboard SideBar/Reports";
@@ -114,6 +115,7 @@ const Dashboard = () => {
 }`}>
         {activePage === "Products" && <Products isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />}
         </div>
+        {activePage === "Subscriptions" && <Subscriptions/>}
         {activePage === "Orders" && <Orders/>}
         {activePage === "Reports" && <Reports/>}
         {activePage === "Inventory Management" && <InventoryManagement/>}

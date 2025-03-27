@@ -30,7 +30,7 @@ const ProductStats = () => {
       </div>
     );
 
-   
+
 
 }
 
