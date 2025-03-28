@@ -1,71 +1,52 @@
 import React from "react";
+import Hero from "../Landing Page/Hero";
+import Nav from "../Landing Page/Nav"
+import Features from "../Landing Page/Features"
+import Footer from "../Landing Page/Footer"
+import Analytics from "../Landing Page/Analytics"
+import Testimonial from "../Landing Page/Testimonial"
+import Support from "../Landing Page/Support"
+import LatestStories from "../Landing Page/LatestStories"
+
+
+import phonecall from "../../Assets/phonecall.png"
+import headset from "../../Assets/headset.png"
 
 const LandingPage = () => {
   return (
-    <div className="font-sans">
+    <div className="font-sans bg-orange-500">
       {/* Top Bar */}
-      <div className="bg-orange-500 text-white text-xs py-2 text-center">
-        Give us a call at 0816XXXXXXXX
+      <div className="flex justify-between p-3">
+      <div className="flex gap-2 bg-orange-500 text-white text-xs py-2 ml-9 ">
+       <span><img src={phonecall} alt="" /></span> Give us a call at 0816XXXXXXXX
       </div>
+      <div className="flex gap-2 bg-orange-500 text-white text-xs py-2 mr-9">
+        Talk to us <span><img src={headset} alt="" /></span>
+      </div>
+      </div>
+
+    
+<div className="rounded-3xl shadow-2xl bg-white">
+          
+<Nav/>
+
+<hr />
       
-      {/* Navbar */}
-      <nav className="flex justify-between items-center p-4 shadow-md">
-        <div className="text-xl font-bold text-orange-500">Barmsy</div>
-        <div className="flex space-x-6 text-gray-700">
-          <a href="#" className="hover:text-orange-500">Shop</a>
-          <a href="#" className="hover:text-orange-500">Pricing</a>
-          <a href="#" className="hover:text-orange-500">Integration</a>
-          <a href="#" className="hover:text-orange-500">Contact</a>
-        </div>
-        <div className="flex space-x-4">
-          <button className="text-gray-700">Login</button>
-          <button className="bg-orange-500 text-white px-4 py-2 rounded-md">
-            Get a Demo
-          </button>
-        </div>
-      </nav>
-      
-      {/* Hero Section */}
-      <section className="text-center py-16">
-        <h1 className="text-4xl font-bold text-gray-800">
-          Making restaurants Prosperous, <br /> efficient & scalable
-        </h1>
-        <p className="text-gray-600 max-w-lg mx-auto mt-4">
-          Lorem ipsum dolor sit amet consectetur. Non at netus ultrices faucibus feugiat.
-        </p>
-        <div className="mt-6 flex justify-center space-x-4">
-          <button className="bg-orange-500 text-white px-6 py-3 rounded-md">
-            Get a Demo
-          </button>
-          <button className="border border-gray-500 text-gray-700 px-6 py-3 rounded-md">
-            Let's Talk
-          </button>
-        </div>
-      </section>
-      
-      {/* Features Section */}
-      <section className="py-12 bg-gray-100 text-center">
-        <h2 className="text-3xl font-bold text-gray-800">Made for <span className="text-orange-500">Everyone</span></h2>
-        <div className="flex justify-center space-x-4 mt-6">
-          <button className="bg-orange-500 text-white px-6 py-2 rounded-full">
-            Analytics
-          </button>
-          <button className="bg-gray-300 text-gray-700 px-6 py-2 rounded-full">
-            Table
-          </button>
-          <button className="bg-gray-300 text-gray-700 px-6 py-2 rounded-full">
-            Kitchen
-          </button>
-          <button className="bg-gray-300 text-gray-700 px-6 py-2 rounded-full">
-            Locations
-          </button>
-        </div>
-      </section>
-      
-      {/* Footer */}
-      <footer className="bg-orange-500 text-white py-8 text-center">
-        <p>&copy; 2025 Barmsy. All Rights Reserved.</p>
-      </footer>
+      <Hero/>
+   
+     <Features/>
+
+     <Analytics/>
+
+     <Testimonial/>
+
+     <Support/>
+
+     <LatestStories/>
+
+     <Footer/>
+</div>
+     
     </div>
   );
 };
