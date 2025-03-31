@@ -22,7 +22,7 @@ const Dashboard = () => {
   const [load, setLoad] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [merchantInfo, setMerchantinfo] = useState([])
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(Cookie.get("barmsyUsertype") === "PENDING" ? true : false)
 
 
   const getUserOnboardingStatus = async () => {
@@ -123,7 +123,7 @@ const Dashboard = () => {
         )}
 
         {/* Other Pages */}
-        {/* {showModal &&
+        {showModal &&
           <Modal>
             <div>
               <div className="flex justify-center space-x-1 pb-4">
@@ -140,7 +140,7 @@ const Dashboard = () => {
 
 
             </div>
-          </Modal>} */}
+          </Modal>}
         {activePage === "Business Locations" && <BusinessLocations locations={merchantInfo?.businessLocations} code={merchantInfo?.merchantCode} fetchDetails={getUserOnboardingStatus} />}
         {activePage === "Business Profile" && <BusinessProfile />}
         {activePage === "Subscription" && <Subscription />}

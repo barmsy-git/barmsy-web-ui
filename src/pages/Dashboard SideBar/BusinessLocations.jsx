@@ -11,9 +11,12 @@ import download from "../../Assets/Download.png"
 import Cookie from 'js-cookie'
 import merchantService from "../../services/merchant-onboarding.js"
 import Dashboard from "../../Assets/Dashboard.png";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const BusinessLocations = ({ locations, code,fetchDetails }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [selectedRows, setSelectedRows] = useState(new Set()); // Track selected checkboxes
 
@@ -81,7 +84,8 @@ const BusinessLocations = ({ locations, code,fetchDetails }) => {
             {/* Right Side: Edit & Delete Icons */}
             <div className="flex space-x-3  p-6">
               <div onClick={() => {
-                history?.push("/Location-Manager-dashboard")
+                navigate("/Location-Manager-dashboard")
+
               }}>
                 <img src={Dashboard} className="h-4 pt-1 w-4" alt="" />
               </div>

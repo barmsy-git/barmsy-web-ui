@@ -70,6 +70,8 @@ const LoginPage = () => {
         }
         else {
           navigate(`/business-setup`)
+          Cookie.set('barmsyUsertype', "")
+
 
         }
 

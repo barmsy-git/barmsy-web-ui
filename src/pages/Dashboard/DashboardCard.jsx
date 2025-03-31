@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { AiOutlineLeft, AiOutlineRight, AiOutlineSetting } from "react-icons/ai";
 import image from "../../Assets/myImage.jpg";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const AllLocations = ({ locations }) => {
@@ -8,6 +9,8 @@ const AllLocations = ({ locations }) => {
   const visibleCards = 3;
   const totalCards = locations?.length;
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
+
 
   const handleNext = () => {
     if (startIndex + visibleCards < totalCards) {
@@ -48,49 +51,54 @@ const AllLocations = ({ locations }) => {
             ref={scrollRef}
             className="flex overflow-x-auto scroll-smooth scrollbar-hide gap-4 w-full"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+
           >
-           
-                {locations.map((loc) => (
-                  <div
-                    key={loc.id}
-                    className="bg-white p-4 rounded-lg w-56 min-w-[320px] h-32 flex-shrink-0 shadow-md border flex items-center gap-3"
+
+            {locations.map((loc) => (
+              <div
+                key={loc.id}
+                onClick={() => {
+                  navigate("/Location-Manager-dashboard")
+
+                }}
+                className="bg-white p-4 rounded-lg w-56 min-w-[320px] h-32 flex-shrink-0 shadow-md border flex items-center gap-3"
+              >
+                {/* Left Section - Image & Status */}
+                <div className="flex flex-col items-center">
+                  <img
+                    src={image}
+                    alt="Location"
+                    className="h-14 w-14 rounded-full object-cover"
+                  />
+                  <p
+                    className={`mt-2 px-2 py-1 text-[10px] font-semibold rounded ${loc?.status === "Open"
+                      ? "text-orange-500 bg-orange-50"
+                      : "text-gray-500 bg-gray-100"
+                      }`}
                   >
-                    {/* Left Section - Image & Status */}
-                    <div className="flex flex-col items-center">
-                      <img
-                        src={image}
-                        alt="Location"
-                        className="h-14 w-14 rounded-full object-cover"
-                      />
-                      <p
-                        className={`mt-2 px-2 py-1 text-[10px] font-semibold rounded ${loc?.status === "Open"
-                          ? "text-orange-500 bg-orange-50"
-                          : "text-gray-500 bg-gray-100"
-                          }`}
-                      >
-                        {loc.status}
-                      </p>
-                    </div>
+                    {loc.status}
+                  </p>
+                </div>
 
-                    {/* Right Section - Details */}
-                    <div className="flex-1">
-                      {/* Orders - Bold Number, Orders Below */}
-                      <p className="text-xl font-bold text-black"> 0<span className="text-xs font-thin text-gray-400">/orders</span></p>
+                {/* Right Section - Details */}
+                <div className="flex-1">
+                  {/* Orders - Bold Number, Orders Below */}
+                  <p className="text-xl font-bold text-black"> 0<span className="text-xs font-thin text-gray-400">/orders</span></p>
 
-                      {/* Address */}
-                      <p className="text-xs text-black mt-1">{loc.streetName}</p>
+                  {/* Address */}
+                  <p className="text-xs text-black mt-1">{loc.streetName}</p>
 
-                      {/* Revenue & Growth - Side by Side */}
-                      <div className="flex justify-between items-center mt-1">
-                        <p className="text-xs text-black">
-                          <span className="text-[10px] text-gray-300">Rev:</span> 0
-                        </p>
-                        <p className="text-xs font-semibold text-green-500">↑ 10</p>
-                      </div>
-                    </div>
+                  {/* Revenue & Growth - Side by Side */}
+                  <div className="flex justify-between items-center mt-1">
+                    <p className="text-xs text-black">
+                      <span className="text-[10px] text-gray-300">Rev:</span> 0
+                    </p>
+                    <p className="text-xs font-semibold text-green-500">↑ 10</p>
                   </div>
-                ))}
-       
+                </div>
+              </div>
+            ))}
+
           </div>}
         {locations?.length === 0 &&
 
