@@ -16,19 +16,19 @@ import DashboardCard from "../../pages/Dashboard/DashboardCard";
 import MyComponent from "react-fullpage-custom-loader";
 import Modal from "../../components/Modal/index"
 import Cookie from 'js-cookie'
-import merchantService from "../../services/merchant-onboarding";
+import merchantService from "../../services/merchant-service";
 const Dashboard = () => {
   const [activePage, setActivePage] = useState("Dashboard");
   const [load, setLoad] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [merchantInfo, setMerchantinfo] = useState([])
-  const [showModal, setShowModal] = useState(Cookie?.get("barmsyUsertype") !== "MERCHANT_ONBOARDED" ? false : true)
+  const [showModal, setShowModal] = useState(false)
 
 
   const getUserOnboardingStatus = async () => {
     setLoad(true)
     try {
-      const result = await merchantService.getUserOnboarding(Cookie?.get("barmsyID"));
+      const result = await merchantService.getMerchant(Cookie?.get("barmsyID"));
 
       if (result) {
         setLoad(false)
@@ -36,6 +36,9 @@ const Dashboard = () => {
       }
     } catch (err) {
       setLoad(false)
+      if (err?.response.data.status === 403) {
+        setShowModal(true)
+      }
     }
   }
 
@@ -90,7 +93,7 @@ const Dashboard = () => {
 
             {/* KPI Section */}
             <section className="mt-3">
-              <DashboardCard />
+              <DashboardCard locations={merchantInfo?.businessLocations} />
             </section>
 
             {/* KPI Chart & Trending Items */}
@@ -120,7 +123,7 @@ const Dashboard = () => {
         )}
 
         {/* Other Pages */}
-        {showModal &&
+        {/* {showModal &&
           <Modal>
             <div>
               <div className="flex justify-center space-x-1 pb-4">
@@ -137,8 +140,8 @@ const Dashboard = () => {
 
 
             </div>
-          </Modal>}
-        {activePage === "Business Locations" && <BusinessLocations />}
+          </Modal>} */}
+        {activePage === "Business Locations" && <BusinessLocations locations={merchantInfo?.businessLocations} code={merchantInfo?.merchantCode} fetchDetails={getUserOnboardingStatus} />}
         {activePage === "Business Profile" && <BusinessProfile />}
         {activePage === "Subscription" && <Subscription />}
         {activePage === "Notifications" && <Notifications />}

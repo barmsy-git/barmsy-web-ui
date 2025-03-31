@@ -22,6 +22,7 @@ const EmailVerificationPage = () => {
   const navigate = useNavigate();
   var urlParams = new URLSearchParams(window.location.search);
   const user_mail = urlParams.get("email");
+  const verifyType = urlParams.get("type");
   const [otp, setOtp] = useState("")
 
   function cleanAndRemoveLast(numberStr) {
@@ -126,11 +127,51 @@ const EmailVerificationPage = () => {
     }
   };
 
+  const handleSubmitResetPassword = async (e) => {
+    e.preventDefault();
+    if (otp?.length < 5) {
+      return;
+    }
+
+    try {
+      setShowEffect('loading')
+      const result = await authService.validateCode(userID, otp);
+      if (result) {
+        if (result?.status) {
+          setShowEffect('confirmed')
+       
+        }
+        else {
+          setShowEffect('expired')
+        }
+      }
+    } catch (err) {
+      setShowEffect('default')
+    }
+  };
+
 
   const resendToken = async () => {
     try {
       setShowEffect('loading')
       const result = await authService.resendRegisterToken(userID);
+      if (result) {
+        if (result?.status) {
+          setShowEffect('default')
+        }
+
+
+      }
+    } catch (err) {
+      setShowEffect('default')
+    }
+  }
+
+
+  const resendTokenCodeForgotPassword = async () => {
+    try {
+      setShowEffect('loading')
+      const result = await verifyType !== "email" ? authService?.resendPasswordForgotToken(userID) : authService.resendRegisterToken(userID);
       if (result) {
         if (result?.status) {
           setShowEffect('default')
@@ -169,7 +210,7 @@ const EmailVerificationPage = () => {
                 Please, enter the code we just sent to {user_mail}.
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={verifyType === "email" ? handleSubmit : handleSubmitResetPassword} className="space-y-6">
                 <div className="mb-3 d-flex justify-content-center align-items-center">
                   <div className="text-center">
                     <PinInput
@@ -198,7 +239,7 @@ const EmailVerificationPage = () => {
                   Submit
                 </button>
 
-                <p className="flex justify-center pt-6 text-orange-500 cursor-pointer font-semibold" onClick={resendToken}>Resend Code</p>
+                <p className="flex justify-center pt-6 text-orange-500 cursor-pointer font-semibold" onClick={verifyType === 'email' ? resendToken : resendTokenCodeForgotPassword}>Resend Code</p>
 
               </form>
             </div>

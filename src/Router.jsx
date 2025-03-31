@@ -23,8 +23,8 @@ import DashboardPage from "./pages/Dashboard/Dashboard.jsx";
 import MerchantLocationDashboardPage from "./pages/MerchantLocationDashboard/Dashboard.jsx"
 import LocationManagerDashboardPage from "./pages/LocationManagerDashboard/Dashboard.jsx"
 import "react-toastify/dist/ReactToastify.css";
-
-
+import ForgotPassword from "./pages/Authentication/ForgotPassword.jsx";
+import  Test from "./pages/Authentication/test.jsx"
 function App() {
     return (
         <div>
@@ -33,6 +33,14 @@ function App() {
                 <Route
                     path="/signup"
                     element={<SignupPage />}
+                />
+                <Route
+                    path="/test"
+                    element={<Test />}
+                />
+                <Route
+                    path="/forgot-password"
+                    element={<ForgotPassword />}
                 />
                 <Route
                     path="/login"

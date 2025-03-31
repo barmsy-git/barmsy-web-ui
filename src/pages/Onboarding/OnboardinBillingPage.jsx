@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { HiOutlineClock } from "react-icons/hi";
-import logo from "../../../public/iconoir_organic-food.svg";
+import logo from "/public/iconoir_organic-food.svg";
 import myImage from "../../Assets/myImage.jpg"
 import { useNavigate } from "react-router-dom";
 import { GlobalStateContext } from "../../context/globalContext";

@@ -14,6 +14,13 @@ body {
   background: #f6f6f5;
   scroll-behavior: smooth;
 }
+
+
+.xl-container{
+  padding: 0px 30px;
+}
+
+
 input,
 select {
   outline: none;
@@ -43,9 +50,6 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.text-whitesmoke{
-  color: whitesmoke;
-}
 /* Hide scrollbar for Chrome, Safari, Edge */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -56,36 +60,3 @@ input[type="number"] {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-
-select {
-  color: gray;
-  background-color: white;
-}
-
-select option {
-  color: gray;
-  background-color: white;
-}
-
-/* Ensures the selected option remains gray */
-select:focus option:checked {
-  background-color: white !important;
-  color: gray !important;
-}
-
-  .react-calendar__navigation {
-    display: flex;
-    justify-content: center !important; /* Center the month title */
-  }
-  .react-calendar__navigation button {
-    position: relative !important;
-    z-index: 10 !important;
-  }
-
-  /* Hide big double arrows inside the calendar */
-
-.react-calendar__navigation button:nth-child(1), 
-.react-calendar__navigation button:nth-child(5) {
-  display: none !important; /* Hides the big double arrows */
-}
-

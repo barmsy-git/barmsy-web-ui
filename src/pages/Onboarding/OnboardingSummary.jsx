@@ -18,21 +18,7 @@ const OnboardingSummary = ({ info, submittedDetails, setCurrentScreen }) => {
           "city": submittedDetails?.businessLocations[0]?.city,
           "stateOrProvince": submittedDetails?.businessLocations[0]?.stateOrProvince,
           "country": "NIGERIA",
-          "businessProfiles": [
-            {
-              "profileName": submittedDetails?.businessLocations[0]?.businessProfiles ?  submittedDetails?.businessLocations[0]?.businessProfiles[0]?.profileName : null,
-              "description": submittedDetails?.businessLocations[0]?.businessProfiles ? submittedDetails?.businessLocations[0]?.businessProfiles[0]?.description :  null,
-              "category": submittedDetails?.businessLocations[0]?.businessProfiles ? submittedDetails?.businessLocations[0]?.businessProfiles[0]?.category :  null,
-              "logo": submittedDetails?.businessLocations[0]?.businessProfiles ? submittedDetails?.businessLocations[0]?.businessProfiles[0]?.logo : null,
-              "selectedSubscription": submittedDetails?.businessLocations[0]?.businessProfiles ?  submittedDetails?.businessLocations[0]?.businessProfiles[0]?.selectedSubscription : null,
-              "billingDetail": {
-                "billingDate": null,
-                "billingAmount": null,
-                "billingCycle": null,
-                "initiatedPayment": false
-              }
-            }
-          ]
+         
         }
       ]
     }
@@ -41,6 +27,7 @@ const OnboardingSummary = ({ info, submittedDetails, setCurrentScreen }) => {
       const result = await onboardingService.saveOnboarding(data, "PENDING_VERIFICATION");
       if (result) {
         setLoad(false)
+        Cookie.set('barmsyUsertype', "PENDING")
         window.location.href = "/dashboard"
 
 

@@ -87,6 +87,7 @@ const OnboardingIndex = () => {
     }, [])
 
 
+
     const getUserOnboardingStatus = async () => {
         setLoad(true)
         try {
@@ -98,15 +99,73 @@ const OnboardingIndex = () => {
                     setCurrentScreen("PENDING_BUSINESS_NAME")
                     setMenus((prevState) =>
                         prevState.map((item) =>
-                          item.page === "PENDING_BUSINESS_NAME" ? { ...item,color: 'active'} : item
+                            item.page === "PENDING_BUSINESS_NAME" ? { ...item, color: 'active' } : item
                         )
-                      );
+                    );
                 }
                 else
-                setCurrentScreen(result.result?.onboardingStatus)
+                    setCurrentScreen(result.result?.onboardingStatus)
                 setSubmittedDetails(result?.result?.onboardingRequest)
-                updateMenuColorById2(result.result?.onboardingStatus)
-                
+                if (result?.result?.onboardingStatus === "PENDING_BUSINESS_CATEGORY_CHOICE") {
+                    setMenus((prevState) =>
+                        prevState.map((item) =>
+                            item.page === "PENDING_BUSINESS_NAME" ? { ...item, color: 'active' } : item
+                        )
+                    );
+                    setMenus((prevState) =>
+                        prevState.map((item) =>
+                            item.page === "PENDING_BUSINESS_CATEGORY_CHOICE" ? { ...item, color: 'active' } : item
+                        )
+                    );
+                }
+                else if (result?.result?.onboardingStatus === "PENDING_BUSINESS_NAME") {
+                    setMenus((prevState) =>
+                        prevState.map((item) =>
+                            item.page === "PENDING_BUSINESS_NAME" ? { ...item, color: 'active' } : item
+                        )
+                    );
+
+                }
+                else if (result?.result?.onboardingStatus === "PENDING_ADD_BUSINESS_LOCATIONS") {
+                    setMenus((prevState) =>
+                        prevState.map((item) =>
+                            item.page === "PENDING_BUSINESS_CATEGORY_CHOICE" ? { ...item, color: 'active' } : item
+                        )
+                    );
+                    setMenus((prevState) =>
+                        prevState.map((item) =>
+                            item.page === "PENDING_BUSINESS_NAME" ? { ...item, color: 'active' } : item
+                        )
+                    );
+                    setMenus((prevState) =>
+                        prevState.map((item) =>
+                            item.page === "PENDING_ADD_BUSINESS_LOCATIONS" ? { ...item, color: 'active' } : item
+                        )
+                    );
+                }
+                else if (result?.result?.onboardingStatus === "PENDING_SUMMARY_CONFIRMATION") {
+                    setMenus((prevState) =>
+                        prevState.map((item) =>
+                            item.page === "PENDING_BUSINESS_CATEGORY_CHOICE" ? { ...item, color: 'active' } : item
+                        )
+                    );
+                    setMenus((prevState) =>
+                        prevState.map((item) =>
+                            item.page === "PENDING_BUSINESS_NAME" ? { ...item, color: 'active' } : item
+                        )
+                    );
+                    setMenus((prevState) =>
+                        prevState.map((item) =>
+                            item.page === "PENDING_ADD_BUSINESS_LOCATIONS" ? { ...item, color: 'active' } : item
+                        )
+                    );
+                    setMenus((prevState) =>
+                        prevState.map((item) =>
+                            item.page === "PENDING_SUMMARY_CONFIRMATION" ? { ...item, color: 'active' } : item
+                        )
+                    );
+                }
+
             }
         } catch (err) {
             setLoad(false)
@@ -116,18 +175,18 @@ const OnboardingIndex = () => {
     function updateMenuColorById2(screen) {
         setMenus((prevState) =>
             prevState.map((item) =>
-              item.page === screen ? { ...item,color: 'active'} : item
+                item.page === screen ? { ...item, color: 'active' } : item
             )
-          );
+        );
 
     }
 
     function updateMenuColorById() {
         setMenus((prevState) =>
             prevState.map((item) =>
-              item.page === currentScreen ? { ...item,color: 'active'} : item
+                item.page === currentScreen ? { ...item, color: 'active' } : item
             )
-          );
+        );
 
     }
 
@@ -143,90 +202,89 @@ const OnboardingIndex = () => {
             {!load &&
 
 
-               <>
-               
-                <div className="flex flex-wrap">
-                <div
-          className={`fixed top-3 cursor-pointer transition-all duration-300 ${
-            isCollapsed ? "left-6" : "left-64"
-          }`}
-          onClick={() => setIsCollapsed(!isCollapsed)}
-        >
-          <img
-            src={vectorClosing}
-            alt="Toggle Sidebar"
-            className={`transition-transform duration-300 ${
-              isCollapsed ? "rotate-180" : ""
-            }`}
-          />
-        </div>
+                <>
 
-       {/* Sidebar (Collapsible) */}
-       {!isCollapsed && (
-          <div className="w-full md:w-3/12 px-6 flex flex-col items-start justify-start min-h-screen bg-[#f2f4f6] pt-48 pb-24 transition-all duration-300">
-            <div className="text-gray-800 font-semibold text-sm mb-4 p-1">
-              Onboarding Checklist
-            </div>
+                    <div className="flex flex-wrap">
+                        <div
+                            className={`fixed top-3 cursor-pointer transition-all duration-300 ${isCollapsed ? "left-6" : "left-64"
+                                }`}
+                            onClick={() => setIsCollapsed(!isCollapsed)}
+                        >
+                            <img
+                                src={vectorClosing}
+                                alt="Toggle Sidebar"
+                                className={`transition-transform duration-300 ${isCollapsed ? "rotate-180" : ""
+                                    }`}
+                            />
+                        </div>
 
-            <ul className="w-full space-y-4">
-              {menus?.map((d, index) => (
-                <li
-                  key={d?.id}
-                  onClick={displayPage.bind(this, d)}
-                  className={`cursor-pointer text-sm flex items-center justify-between px-6 py-2 rounded-full transition-all shadow-sm ${
-                    d?.color === "inactive"
-                      ? "bg-gray-50 text-black border border-gray-300"
-                      : "bg-white text-orange-500 border-2"
-                  }`}
-                >
-                  {/* Left Side: Step Number or Check Icon */}
-                  <div className="flex items-center">
-                    <div
-                      className={`w-7 h-7 flex items-center justify-center rounded-full font-bold text-sm ${
-                        d?.color === "inactive"
-                          ? "border text-gray-300"
-                          : "bg-orange-500 text-white"
-                      }`}
-                    >
-                      {d?.color === "inactive" ? index + 1 : "✓"}
+                        {/* Sidebar (Collapsible) */}
+                        {!isCollapsed && (
+                            <div className="w-full md:w-3/12 px-6 flex flex-col items-start justify-start min-h-screen bg-[#f2f4f6] pt-48 pb-24 transition-all duration-300">
+                                <div className="text-gray-800 font-semibold text-sm mb-4 p-1">
+                                    Onboarding Checklist
+                                </div>
+
+                                <ul className="w-full space-y-4">
+                                    {menus?.map((d, index) => (
+                                        <li
+                                            key={d?.id}
+                                            onClick={displayPage.bind(this, d)}
+                                            className={`cursor-pointer text-sm flex items-center justify-between px-6 py-2 rounded-full transition-all shadow-sm ${d?.color === "inactive"
+                                                ? "bg-gray-50 text-black border border-gray-300"
+                                                : "bg-white text-orange-500 border-2"
+                                                }`}
+                                        >
+                                            {/* Left Side: Step Number or Check Icon */}
+                                            <div className="flex items-center">
+                                                <div
+                                                    className={`w-7 h-7 flex items-center justify-center rounded-full font-bold text-sm ${d?.color === "inactive"
+                                                        ? "border text-gray-300"
+                                                        : "bg-orange-500 text-white"
+                                                        }`}
+                                                >
+                                                    {d?.color === "inactive" ? index + 1 : "✓"}
+                                                </div>
+
+                                                {/* Business Name and Location should be black when checked */}
+                                                <h3
+                                                    className={`pl-4 font-medium ${d?.color === 'inactive' ? 'text-dark' : ''}`}
+                                                >
+                                                    {d?.name}
+                                                </h3>
+                                            </div>
+
+                                            {/* Right Side: Orange Arrow */}
+                                            <span className="text-orange-500 text-3xl">→</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <div className="flex justify-content text-orange" onClick={() => {
+                                    Cookie.remove("token");
+                                    Cookie.remove("barmsyID");
+                                    Cookie.remove("barmsyD");
+                                    window.location.href = "/login"
+                                }}>Log Out</div>
+                            </div>
+                        )}
+
+
+                        <div
+                            className={`transition-all duration-300 ${isCollapsed ? "w-full" : "w-full md:w-9/12"
+                                } bg-white min-h-screen flex flex-col items-center justify-center px-6 pb-24 pt-8`}
+                        >
+                            {renderPageEffect()}
+                        </div>
+
+
                     </div>
+                </>
 
-                    {/* Business Name and Location should be black when checked */}
-                    <h3
-                      className={`pl-4 font-medium ${
-                        (d?.name === "Business Name" ||
-                          d?.name === "Business Location") &&
-                        d?.color !== "inactive"
-                          ? "text-black"
-                          : ""
-                      }`}
-                    >
-                      {d?.name}
-                    </h3>
-                  </div>
-
-                  {/* Right Side: Orange Arrow */}
-                  <span className="text-orange-500 text-3xl">→</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-
-<div
-          className={`transition-all duration-300 ${
-            isCollapsed ? "w-full" : "w-full md:w-9/12"
-          } bg-white min-h-screen flex flex-col items-center justify-center px-6 pb-24 pt-8`}
-        >
-         {renderPageEffect()}
-     </div>
- 
-
-</div>
-</>
-                
-                }
+            }
         </>
     );
 };

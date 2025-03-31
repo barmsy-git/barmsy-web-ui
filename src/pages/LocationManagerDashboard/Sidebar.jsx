@@ -4,7 +4,6 @@ import { FiLogOut } from "react-icons/fi";
 import logo from "../../../public/iconoir_organic-food.svg"
 import Dashboard from "../../Assets/Dashboard.png";
 import GenerateBarcode from "../../Assets/Barcodes.png"
-import Subscriptions from "../../Assets/Subscriptions.png";
 import Products from "../../Assets/Products.png";
 import Orders from "../../Assets/Orders.png";
 import Reports from "../../Assets/Report.png";
@@ -31,7 +30,6 @@ const Sidebar = ({icon, activePage, setActivePage, isCollapsed }) => {
             <div className="pt-10 p-4">
               <SidebarItem icon={<img src={Dashboard} alt="Dashboard" className="h-5 w-5" />} label="Dashboard" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
               <SidebarItem icon={<img src={GenerateBarcode} alt="Dashboard" className="h-5 w-5" />} label="Generate Barcode" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
-              <SidebarItem icon={<img src={Subscriptions} alt="Dashboard" className="h-5 w-5" />} label="Subscription" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
               <SidebarItem icon={<img src={Products} alt="Dashboard" className="h-5 w-5" />} label="Products" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
               <SidebarItem icon={<img src={Orders} alt="Dashboard" className="h-5 w-5" />} label="Orders" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />
               <SidebarItem icon={<img src={Reports} alt="Dashboard" className="h-5 w-5" />} label="Reports" activePage={activePage} setActivePage={setActivePage} isCollapsed={isCollapsed} />

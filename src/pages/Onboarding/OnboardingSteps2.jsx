@@ -61,21 +61,7 @@ const OnboardingSteps2 = ({ setCurrentScreen, setPrevState,submittedDetails,getU
           "city": null,
           "stateOrProvince": null,
           "country": null,
-          "businessProfiles": [
-            {
-              "profileName": null,
-              "description": null,
-              "category": null,
-              "logo": null,
-              "selectedSubscription": null,
-              "billingDetail": {
-                "billingDate": null,
-                "billingAmount": null,
-                "billingCycle": null,
-                "initiatedPayment": null
-              }
-            }
-          ]
+         
         }
       ]
     }

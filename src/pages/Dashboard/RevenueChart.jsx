@@ -81,7 +81,6 @@ const RevenueChart = ({ merchant }) => {
   return (
     <div className="bg-white w-full">
       {/* KPI Title and Timeframe Selection in the Same Row */}
-      {merchant ?
         <div>
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xs
@@ -163,10 +162,7 @@ const RevenueChart = ({ merchant }) => {
                 );
               })}
           </div>
-        </div> :
-        <div className="">
-          <div>No Data Yet</div>
-        </div>}
+        </div>
     </div>
 
   );

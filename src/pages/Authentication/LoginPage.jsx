@@ -33,19 +33,22 @@ const LoginPage = () => {
         setLoading(false)
         Cookie.set('token', result.result.accessToken)
         Cookie.set('barmsyID', result.result.user.id)
-        Cookie.set('barmsyUsertype',result?.result?.user?.userType)
         showMessage({
           type: 'success',
           message: result?.message
         })
-        if (result?.result?.user?.userType === "MERCHANT_ONBOARDED") {
-          navigate(`/dashboard`)
+        const userRoles = result?.result?.user?.roles?.filter((role) => role?.name === "MERCHANT_ONBOARDING");
+        console.log(userRoles)
+        if (userRoles?.length > 0) {
+          getUserOnboardingStatus()
         }
         else {
-          navigate(`/business-setup`)
+          navigate(`/dashboard`)
         }
-
       }
+
+
+
     } catch (err) {
       setLoading(false)
       if (err?.response.data.status === 403) {
@@ -60,20 +63,22 @@ const LoginPage = () => {
       const result = await merchantService.getUserOnboarding(Cookie?.get("barmsyID"));
 
       if (result) {
-
-        if (result?.result?.userType === "MERCHANT_ONBOARDED") {
+        if (result?.result?.onboardingStatus === "PENDING_VERIFICATION") {
           navigate(`/dashboard`)
+          Cookie.set('barmsyUsertype', "PENDING")
 
         }
-
         else {
           navigate(`/business-setup`)
+
         }
 
       }
     } catch (err) {
     }
   }
+
+
 
   return (
     <div className="flex min-h-screen">

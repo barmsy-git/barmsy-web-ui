@@ -56,7 +56,7 @@ const SignUpPage = () => {
         Cookie?.set('barsmyD', result.result?.id)
         setLoading(false)
         setTimeout(() => {
-          navigate(`/verify-email?email=${result?.result?.username}`)
+          navigate(`/verify-email?email=${result?.result?.username}&type=email`)
         }, 1300)
       }
     } catch (err) {

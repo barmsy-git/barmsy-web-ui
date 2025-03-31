@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
 const libraries = ["places"]; // Required library for Places Autocomplete
 
-const GooglePlacesAutocomplete = ({ setCurrentAddress,setCity, setState, setPostalCode, setHouseNumber }) => {
+const GooglePlacesAutocomplete = ({ setCurrentAddress,setCity, setState, setPostalCode, setHouseNumber,setCountry, }) => {
     const [address, setAddress] = useState("");
     const autocompleteRef = useRef(null);
 
@@ -50,6 +50,7 @@ const GooglePlacesAutocomplete = ({ setCurrentAddress,setCity, setState, setPost
               }
             }
             setCity(city)
+            setCountry(country)
             setState(state)
             setPostalCode(postalcode)
             setHouseNumber(housenumber)

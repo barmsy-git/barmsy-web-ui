@@ -10,7 +10,32 @@ const merchantService = {
                 status,
             })),
 
-          
+    getMerchant: (id) =>
+        serviceInstance
+            .get(`${config.merchantBaseUrl}/merchant/getByUserId/${id}`)
+            .then(({ data, status }) => ({
+                ...data,
+                status,
+            })),
+
+    getProvinces: (country) =>
+        serviceInstance
+            .get(`${config.merchantBaseUrl}/state-or-province/getAllByCountryName/${country}`)
+            .then(({ data, status }) => ({
+                ...data,
+                status,
+            })),
+
+    createLocation: (data) =>
+        serviceInstance
+            .post(`${config.merchantBaseUrl}/business-location/create`, data)
+            .then(({ data, status }) => ({
+                ...data,
+                status,
+            })),
+
+
+
 
 };
 

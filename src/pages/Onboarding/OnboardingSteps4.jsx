@@ -7,15 +7,20 @@ import { useNavigate } from "react-router-dom";
 import Location from "../../components/Location/Index"
 import { GlobalStateContext } from "../../context/globalContext";
 import onboardingService from "../../services/merchant-onboarding"
+import merchantService from "../../services/merchant-service";
+import Modal from "../../components/Modal/index"
 import { ThreeDots } from "react-loader-spinner";
-const BusinessLocation = ({ setCurrentScreen, setPrevState,submittedDetails,getUserOnboardingStatus, updateMenuColorById }) => {
+const BusinessLocation = ({ setCurrentScreen, setPrevState, submittedDetails, getUserOnboardingStatus, updateMenuColorById }) => {
   const [selectedLocation, setSelectedLocation] = useState("")
   const { onboardingDetails, setOnboardingDetails } = useContext(GlobalStateContext);
   const [addressObj, setAddressObj] = useState({})
   const [city, setCity] = useState("")
   const [state, setState] = useState("")
   const [postalCode, setPostalCode] = useState("")
+  const [provinces, setProvinces] = useState([])
   const [houseNumber, setHouseNumber] = useState("")
+  const [country, setCountry] = useState("")
+  const [validationResult, setValidationResult] = useState(false)
   const [load, setLoad] = useState(false)
   const navigate = useNavigate();
 
@@ -31,7 +36,7 @@ const BusinessLocation = ({ setCurrentScreen, setPrevState,submittedDetails,getU
 
 
   const saveData = async () => {
-    if (!city && !state && !postalCode && !houseNumber &&  !selectedLocation) {
+    if (!city && !state && !postalCode && !houseNumber && !selectedLocation) {
       showMessage({
         type: 'error',
         message: "Fields are all required"
@@ -42,30 +47,16 @@ const BusinessLocation = ({ setCurrentScreen, setPrevState,submittedDetails,getU
     updateMenuColorById()
     const data = {
       "businessName": submittedDetails?.businessName,
-      "businessCategories":  submittedDetails?.businessCategories,
+      "businessCategories": submittedDetails?.businessCategories,
       "businessLocations": [
         {
-          "streetName":selectedLocation ? selectedLocation : null,
-          "houseNumber": onboardingDetails.businessHouseNumber ?  onboardingDetails.businessHouseNumber : null,
-          "postalCode": onboardingDetails?.businessPostalCode ? onboardingDetails?.businessPostalCode :  null,
+          "streetName": selectedLocation ? selectedLocation : null,
+          "houseNumber": onboardingDetails.businessHouseNumber ? onboardingDetails.businessHouseNumber : null,
+          "postalCode": onboardingDetails?.businessPostalCode ? onboardingDetails?.businessPostalCode : null,
           "city": onboardingDetails.businessCity ? onboardingDetails.businessCity : null,
           "stateOrProvince": onboardingDetails.businessState ? onboardingDetails.businessState : null,
           "country": "NIGERIA",
-          "businessProfiles": [
-            {
-              "profileName": null,
-              "description": null,
-              "category": null,
-              "logo": null,
-              "selectedSubscription": null,
-              "billingDetail": {
-                "billingDate": null,
-                "billingAmount": null,
-                "billingCycle": null,
-                "initiatedPayment": null
-              }
-            }
-          ]
+
         }
       ]
     }
@@ -80,8 +71,25 @@ const BusinessLocation = ({ setCurrentScreen, setPrevState,submittedDetails,getU
 
     } catch (err) {
       setLoad(false)
-     
+
     }
+  }
+
+  const validateContaiedState = () => {
+    var statecontained = provinces.some(x => x.name?.toLowerCase() === state?.toLowerCase());
+    return statecontained
+
+  }
+
+  const validateInputedAddress = () => {
+    var findInputedAddressContainsProvince = provinces.some(x => x.name?.toLowerCase() === state?.toLowerCase());
+    console.log(findInputedAddressContainsProvince)
+    console.log(state)
+    if (findInputedAddressContainsProvince === true) {
+      setValidationResult(false)
+    }
+    else
+      setValidationResult(true)
   }
 
 
@@ -91,16 +99,16 @@ const BusinessLocation = ({ setCurrentScreen, setPrevState,submittedDetails,getU
       businessHouseNumber: houseNumber,
       businessCity: city,
       businessState: state,
-      businessPostalCode: postalCode
+      businessPostalCode: postalCode,
+      country
     }));
-    console.log(city, state, postalCode, houseNumber)
 
-  }, [city, state, postalCode, houseNumber])
+  }, [city, state, postalCode, houseNumber, country])
 
-  
+
 
   useEffect(() => {
-    if(submittedDetails?.businessCategories){
+    if (submittedDetails?.businessCategories) {
       setSelectedLocation(submittedDetails?.streetName)
       setOnboardingDetails((prevState) => ({
         ...prevState,
@@ -110,8 +118,38 @@ const BusinessLocation = ({ setCurrentScreen, setPrevState,submittedDetails,getU
         businessPostalCode: submittedDetails.postalCode
       }));
     }
-  },[submittedDetails])
+  }, [submittedDetails])
 
+  const onClose = () => {
+    setValidationResult(false)
+  }
+
+
+  const getProvinces = async () => {
+    try {
+      const result = await merchantService.getProvinces("Nigeria");
+      if (result) {
+        setProvinces(result?.result?.map((d) => ({
+          name : d?.name?.toLowerCase()
+        })))
+      }
+
+    } catch (err) {
+      setLoad(false)
+
+    }
+  }
+
+  useEffect(() => {
+    if (selectedLocation && country) {
+      validateInputedAddress()
+    }
+
+  }, [selectedLocation, country])
+
+  useEffect(() => {
+      getProvinces()
+  }, [])
 
 
 
@@ -129,7 +167,7 @@ const BusinessLocation = ({ setCurrentScreen, setPrevState,submittedDetails,getU
         <label className="text-xs text-black">Street Address <span className="text-red-600">*</span></label>
         <div className="flex items-center border border-gray-300 rounded-full text-xs px-4 py-1 bg-white">
           <FaMapMarkerAlt className="text-gray-400 mr-2" />
-          <Location setCurrentAddress={setSelectedLocation} setCity={setCity} setState={setState} setPostalCode={setPostalCode} setHouseNumber={setHouseNumber} />
+          <Location setCurrentAddress={setSelectedLocation} setCity={setCity} setState={setState} setPostalCode={setPostalCode} setHouseNumber={setHouseNumber} setCountry={setCountry} />
         </div>
         <div className="mt-3">
           <label className="text-xs text-black">House Number <span className="text-red-600">*</span></label>
@@ -200,35 +238,84 @@ const BusinessLocation = ({ setCurrentScreen, setPrevState,submittedDetails,getU
 
           />
         </div>
+        <div className="mt-3">
+          <label className="text-xs text-black">Country <span className="text-red-600">*</span></label>
+          <input
+            type="text"
+            //   value={businessName}
+            //   disabled
+            onChange={(e) => {
+              setOnboardingDetails((prevState) => ({
+                ...prevState,
+                country: e.target.value,
+              }));
+            }}
+            value={onboardingDetails?.country}
+            className="w-full border rounded-full px-4 py-2  text-xs bg-white text-black  mt-1"
+
+          />
+        </div>
       </div>
 
-      {/* Continue Button */}
-      <button
-        className={`mt-6 px-4 py-2 rounded-full max-w-lg w-full text-white text-sm font-medium transition-all ${validateInputs() ? "bg-orange-500 hover:bg-orange-600" : "bg-gray-300 cursor-not-allowed"
-          }`}
-        onClick={() => {
-          saveData()
+      {validationResult &&
+        <Modal onClose={onClose}>
+          <div>
+            <div className="flex justify-center space-x-1 pb-4">
+              <img src={logo} alt="Barmsy Logo" className="h-10" />
+              <h4 className="text-3xl font-semibold text-orange-500 ml-5">Barmsy</h4>
+            </div>
+            <div className="text- text-sm py-4 text-center">
+              <p>We do not operate in this state currently, We currently operate in the following state:{" "}{provinces?.map((x) => {
+                return <span className="pr-1 " style={{ fontWeight: 500 }}>{x?.name?.toLowerCase()}</span>
+              })}</p>
+            </div>
+            <br />
 
-        }} disabled={!validateInputs()}
-      >
-          {load ?
-          <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
-            <ThreeDots
-              visible={load}
-              height="20"
-              width="40"
-              color="#fff"
-              radius="9"
-              ariaLabel="three-dots-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-            />
+            <button
+              className="mt-6 px-2 py-3 rounded-full w-full text-white text-sm font-medium transition-all bg-orange-500 hover:bg-orange-600"
+              onClick={() => {
+                onClose()
+
+              }}
+            >
+
+              Close
+
+            </button>
+
+
           </div>
-          :
-          <>
-            Continue
-          </>}
-      </button>
+        </Modal>}
+
+
+      {!validationResult && selectedLocation && validateContaiedState() &&
+        <button
+          className={`mt-6 px-4 py-2 rounded-full max-w-lg w-full text-white text-sm font-medium transition-all bg-orange-500 hover:bg-orange-600"
+            }`}
+          onClick={() => {
+            saveData()
+
+          }}
+        >
+          {load ?
+            <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
+              <ThreeDots
+                visible={load}
+                height="20"
+                width="40"
+                color="#fff"
+                radius="9"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            </div>
+            :
+            <>
+              Continue
+            </>}
+        </button>}
+
     </div>
 
   );

@@ -5,7 +5,7 @@ import { GlobalStateContext } from "../../context/globalContext";
 import onboardingService from "../../services/merchant-onboarding"
 import { ThreeDots } from "react-loader-spinner";
 import showMessage from "../../utils/toast";
-const OnboardingSteps = ({ setCurrentScreen, setPrevState,submittedDetails,getUserOnboardingStatus, updateMenuColorById,currentStep }) => {
+const OnboardingSteps = ({ setCurrentScreen, setPrevState,submittedDetails,getUserOnboardingStatus, updateMenuColorById }) => {
   const { onboardingDetails, setOnboardingDetails } = useContext(GlobalStateContext);
   const [load, setLoad] = useState(false)
   const navigate = useNavigate();
@@ -30,21 +30,7 @@ const OnboardingSteps = ({ setCurrentScreen, setPrevState,submittedDetails,getUs
           "city": null,
           "stateOrProvince": null,
           "country": null,
-          "businessProfiles": [
-            {
-              "profileName": null,
-              "description": null,
-              "category": null,
-              "logo": null,
-              "selectedSubscription": null,
-              "billingDetail": {
-                "billingDate": null,
-                "billingAmount": null,
-                "billingCycle": null,
-                "initiatedPayment": null
-              }
-            }
-          ]
+         
         }
       ]
     }
@@ -72,16 +58,6 @@ const OnboardingSteps = ({ setCurrentScreen, setPrevState,submittedDetails,getUs
       }));
     }
   },[submittedDetails])
-
-  const steps = [
-    "Business Name",
-    "Business Categories",
-    "Business Location",
-    "Business Profile",
-    "Subscription Plan",
-    "Billing Details",
-    "Summary",
-  ];
 
   return (
     <div>

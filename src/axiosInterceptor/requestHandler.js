@@ -43,13 +43,20 @@ serviceInstance.interceptors.response.use(undefined, (err) => {
 
   if
     (error.status === 401) {
-    showMessage({
-      type: 'error',
-      message: customError
-    });
+      Cookie.remove("token");
+      Cookie.remove("barmsyID");
+      Cookie.remove("barmsyD");
+      window.location.href="/login"
+    window.location.href = "/login"
 
 
-  } else {
+
+  } 
+  else if
+    (error.status === 403) {
+
+  } 
+  else {
 
     showMessage({
       type: 'error',
