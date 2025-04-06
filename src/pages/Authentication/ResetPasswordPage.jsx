@@ -2,38 +2,50 @@ import { useState } from "react";
 
 // import { useAuthStore } from "../store/authStore";
 import { useNavigate, useParams } from "react-router-dom";
-// import Input from "../components/Input";
 import { Lock } from "lucide-react";
+import authService from "../../services/auth-service"
 // import toast from "react-hot-toast";
+import { ThreeDots } from "react-loader-spinner";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const ResetPasswordPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { resetPassword, error, isLoading, message } = useAuthStore();
-
+  const [loading, setLoading] = useState(false)
   const { token } = useParams();
+  const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const request = {
+      "newPassword": password,
+      "matchingPassword": confirmPassword
+    }
+    try {
+      setLoading(true)
+      const result = await authService.resetPassword(request);
+      if (result) {
+        setLoading(false)
+        showMessage({
+          type: 'success',
+          message: result?.message
+        })
+        setTimeout(() => {
+          navigate(`/login`)
+        }, 1300)
 
-    // if (password !== confirmPassword) {
-    //   toast.success("Passwords do not match");
-    //   return;
-    // }
-    // try {
-    //   await resetPassword(token, password);
+      }
 
-    //   toast.success(
-    //     "Password reset successfully, redirecting to login page..."
-    //   );
-    //   setTimeout(() => {
-    //     navigate("/login");
-    //   }, 2000);
-    // } catch (error) {
-    //   console.error(error);
-    //   toast.error(error.message || "Error resetting password");
-    // }
+
+
+    } catch (err) {
+      setLoading(false)
+
+
+    }
   };
 
   return (
@@ -42,7 +54,7 @@ const ResetPasswordPage = () => {
     from-gray-900 via-green-900 to-emerald-900 flex items-center justify-center relative overflow-hidden"
     >
       <div
-        
+
         className="max-w-md w-full bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden"
       >
         <div className="p-8">
@@ -53,24 +65,73 @@ const ResetPasswordPage = () => {
           {message && <p className="text-green-500 text-sm mb-4">{message}</p>} */}
 
           <form onSubmit={handleSubmit}>
-            <Input
-              icon={Lock}
-              type="password"
-              placeholder="New Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <label htmlFor="password" className="block text-sm font-medium text-black">
+              Password
+            </label>
+            <div className="mt-1 relative rounded-full shadow-sm">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
+                <Lock className="h-5 w-5 text-gray-400" aria-hidden="true" />
+              </div>
+              <input
+                id="password"
+                type={visible ? "text" : "password"}
+                required
+                value={password}
+                onChange={(e) =>
+                  setPassword(e.target.value)
+                }
+                className="block w-full px-3 py-2 pl-10 border border-gray-300 rounded-full shadow-sm
+                    placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-300 sm:text-sm"
+                placeholder="••••••••"
+              />
+              {visible ? (
+                <AiOutlineEye
+                  className="absolute right-2 top-2 text-gray-400 cursor-pointer"
+                  size={20}
+                  onClick={() => setVisible(false)}
+                />
+              ) : (
+                <AiOutlineEyeInvisible
+                  className="absolute right-2 top-2 text-gray-400 cursor-pointer"
+                  size={20}
+                  onClick={() => setVisible(true)}
+                />
+              )}
+            </div>
 
-            <Input
-              icon={Lock}
-              type="password"
-              placeholder="Confirm New Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-
+            <label htmlFor="password" className="block text-sm font-medium text-black">
+              Confirm  Password
+            </label>
+            <div className="mt-1 relative rounded-full shadow-sm">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
+                <Lock className="h-5 w-5 text-gray-400" aria-hidden="true" />
+              </div>
+              <input
+                id="password"
+                type={visible2 ? "text" : "password"}
+                required
+                value={confirmPassword}
+                onChange={(e) =>
+                  setConfirmPassword(e.target.value)
+                }
+                className="block w-full px-3 py-2 pl-10 border border-gray-300 rounded-full shadow-sm
+                    placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-300 sm:text-sm"
+                placeholder="••••••••"
+              />
+              {visible2 ? (
+                <AiOutlineEye
+                  className="absolute right-2 top-2 text-gray-400 cursor-pointer"
+                  size={20}
+                  onClick={() => setVisible2(false)}
+                />
+              ) : (
+                <AiOutlineEyeInvisible
+                  className="absolute right-2 top-2 text-gray-400 cursor-pointer"
+                  size={20}
+                  onClick={() => setVisible2(true)}
+                />
+              )}
+            </div>
             <button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -78,9 +139,21 @@ const ResetPasswordPage = () => {
               type="submit"
             //   disabled={isLoading}
             >
-              {/* {isLoading ? "Resetting..." : "Set New Password"} */}
+              {loading ?
+                <ThreeDots
+                  visible={loading}
+                  height="20"
+                  width="40"
+                  color="#fff"
+                  radius="9"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                /> :
+
+                "Submit"}
             </button>
-          </form>
+          </form> 
         </div>
       </div>
     </div>

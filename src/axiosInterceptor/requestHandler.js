@@ -40,22 +40,34 @@ serviceInstance.interceptors.response.use(undefined, (err) => {
   const customError = err.response?.data?.detail
   const finalErrorMsg = customError ? customError : responseError;
 
+  var path = window.location.pathname
 
   if
     (error.status === 401) {
+    if (path?.replace("/", "") !== "login") {
       Cookie.remove("token");
       Cookie.remove("barmsyID");
       Cookie.remove("barmsyD");
-      window.location.href="/login"
-    window.location.href = "/login"
+      window.location.href = "/login"
+      window.location.href = "/login"
+    }
+    else {
+      showMessage({
+        type: 'error',
+        message:  showMessage({
+          type: 'success',
+          message: customError
+        })
+      })
+    }
 
 
 
-  } 
+  }
   else if
     (error.status === 403) {
 
-  } 
+  }
   else {
 
     showMessage({

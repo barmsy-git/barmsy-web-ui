@@ -14,11 +14,21 @@ const authService = {
 
     resendPasswordForgotToken: (id) =>
         serviceInstance
-            .post(`${config.baseUrl}/auth/resendForgotPasswordCode?userId=${id} `, request)
+            .get(`${config.baseUrl}/auth/resendForgotPasswordCode?userId=${id}`)
             .then(({ data, status }) => ({
                 ...data,
                 status,
             })),
+
+    resetPassword: (id,req) =>
+        serviceInstance
+            .put(`${config.baseUrl}/user/resetPassword/${id}`, req)
+            .then(({ data, status }) => ({
+                ...data,
+                status,
+            })),
+
+
     register: (request) =>
         serviceInstance
             .post(`${config.baseUrl}/auth/signup `, request)

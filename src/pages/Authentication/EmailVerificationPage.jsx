@@ -139,6 +139,10 @@ const EmailVerificationPage = () => {
       if (result) {
         if (result?.status) {
           setShowEffect('confirmed')
+          Cookie.set('token', result.result.accessToken)
+          setTimeout(() => {
+            navigate(`/reset-password`)
+          }, 1200)
        
         }
         else {
@@ -169,9 +173,10 @@ const EmailVerificationPage = () => {
 
 
   const resendTokenCodeForgotPassword = async () => {
+    console.log(verifyType)
     try {
       setShowEffect('loading')
-      const result = await verifyType !== "email" ? authService?.resendPasswordForgotToken(userID) : authService.resendRegisterToken(userID);
+      const result = await authService?.resendPasswordForgotToken(userID);
       if (result) {
         if (result?.status) {
           setShowEffect('default')

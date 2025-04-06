@@ -67,7 +67,7 @@ const BusinessLocations = ({ locations, code,fetchDetails }) => {
         </button>
       </header>
 
-      {showModal && <AddLocationModal onClose={() => setShowModal(false)} code={code} fetchDetails={fetchDetails} />}
+      {showModal && <AddLocationModal isOpen={showModal} onClose={() => setShowModal(false)} code={code} fetchDetails={fetchDetails} />}
 
       {/* Selection Bar (Appears Above Table Headers) */}
       <div className="bg-white shadow-md rounded-lg mt-4 w-full">

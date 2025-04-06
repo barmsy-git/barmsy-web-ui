@@ -24,6 +24,7 @@ import MerchantLocationDashboardPage from "./pages/MerchantLocationDashboard/Das
 import LocationManagerDashboardPage from "./pages/LocationManagerDashboard/Dashboard.jsx"
 import "react-toastify/dist/ReactToastify.css";
 import ForgotPassword from "./pages/Authentication/ForgotPassword.jsx";
+import ResetPassword from "./pages/Authentication/PasswordReset.jsx";
 import  Test from "./pages/Authentication/test.jsx"
 function App() {
     return (
@@ -41,6 +42,10 @@ function App() {
                 <Route
                     path="/forgot-password"
                     element={<ForgotPassword />}
+                />
+                  <Route
+                    path="/reset-password"
+                    element={<ResetPassword />}
                 />
                 <Route
                     path="/login"

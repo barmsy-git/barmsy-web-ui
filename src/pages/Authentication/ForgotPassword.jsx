@@ -27,12 +27,13 @@ const ForgotPassword = () => {
       const result = await authService.ForgotPassword(formData?.username);
       if (result) {
         setLoading(false)
-       
+
         showMessage({
           type: 'success',
           message: result?.message
         })
-        navigate(`/verify-email?type=token`)
+        Cookie.set('barsmyD', result?.result)
+        navigate(`/verify-email?type=token&email=${formData.username}`)
 
       }
 
@@ -40,13 +41,13 @@ const ForgotPassword = () => {
 
     } catch (err) {
       setLoading(false)
-      
+
 
     }
   };
 
- 
- 
+
+
 
 
   return (
@@ -55,9 +56,9 @@ const ForgotPassword = () => {
       <div className="w-[85%] flex items-center bg-white px-8 justify-center">
         <div className="max-w-md w-full ml-14">
           <h2 className="text-2xl font-extrabold text-black">Forgot Password</h2>
-        
 
-        
+
+
           {/* Error Message */}
 
           {/* Login Form */}
@@ -85,7 +86,7 @@ const ForgotPassword = () => {
                 </div>
               </div>
 
-           
+
 
               {/* Submit Button */}
               <button
@@ -115,8 +116,14 @@ const ForgotPassword = () => {
               <br />
 
             </form>
+            <p className="mt-8 text-center text-sm text-gray-400">
+              New to Barmsy?{" "}
+              <Link to="/signup" className="font-medium text-orange-500 hover:text-orange-400">
+                Create an account
+              </Link>
+            </p>
 
-         
+
           </div>
         </div>
       </div>
